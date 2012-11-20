@@ -14,5 +14,5 @@ class Titan
     @helpers[name] = fn if _.isFunction(fn)
 
 _t = new Titan();
-(exports ? this).titan = _t
-(exports ? this).__ = _t.helpers
+window.titan = _t
+window.__ = _t.helpers

@@ -1,3 +1,11 @@
+require 'jquery'
+require 'underscore'
+
+require 'titan'
+require 'core/view'
+require 'core/presenter'
+require 'core/amplify'
+
 titan.define class Bootstrapper
   constructor: (@jq) ->
     @presenters = []

@@ -1,3 +1,13 @@
-require './boostrap'
+require './bootstrap'
 require './app'
-run App
+require 'keystone'
+
+if ENV['RACK_ENV'] == 'development'
+  map '/assets' do
+    run Keystone::Server
+  end
+end
+
+map '/' do
+  run App
+end

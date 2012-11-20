@@ -1,11 +1,12 @@
-asset_path "#{File.dirname(__FILE__)}/../assets"
+assets_are_in ENV['ASSET_PATH']
 
 asset 'titan.js' do |a|
-  a.paths 'views/coffee', 'public/js'
-  a.toolchain :coffeescript, :closure, :require
+  a.scan 'scripts/coffee', 'scripts/js'
+  a.toolchain :coffeescript, :require
+  a.post_build :closure
 end
 
 asset 'titan.css' do |a|
-  a.paths 'views/scss', 'public/css'
+  a.scan 'styles/scss', 'styles/css'
   a.toolchain :sassy
 end

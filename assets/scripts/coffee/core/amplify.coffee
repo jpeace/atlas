@@ -1,3 +1,5 @@
+require 'amplify'
+
 amplify.request.decoders.entityResponse = 
   (data, status, xhr, success, error) ->
     if data.success

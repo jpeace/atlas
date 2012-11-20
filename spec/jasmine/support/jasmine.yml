@@ -5,11 +5,12 @@ runner_output: "spec/jasmine/runner.html"
 # Return an array of filepaths relative to src_dir to include before jasmine specs.
 # Default: []
 src_files:
-  - public/js/jquery.js
-  - public/js/amplify.js
-  - public/js/underscore.js
-  - views/coffee/titan.coffee
-  - views/coffee/core/**/*.coffee
+  - spec/jasmine/mocks/*.coffee
+  - assets/scripts/js/jquery.js
+  - assets/scripts/js/amplify.js
+  - assets/scripts/js/underscore.js
+  - assets/scripts/coffee/titan.coffee
+  - assets/scripts/coffee/core/**/*.coffee
 
 # stylesheets
 #
