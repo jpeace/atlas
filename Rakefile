@@ -3,24 +3,22 @@ require 'jasmine-headless-webkit'
 require 'rspec/core/rake_task'
 require 'keystone'
 
-require_relative 'config/environment'
-
-task :default => ['jasmine:headless']
-
-# desc "Run rspec specs"
-# RSpec::Core::RakeTask.new(:rspec) do |t|
-#   t.rspec_opts = '-dcfd --require rspec/spec_helper'
-# end
+task :default => :spec
 
 desc "Runs jasmine specs"
-Jasmine::Headless::Task.new('jasmine:headless') do |t|
+Jasmine::Headless::Task.new(:spec => :assets) do |t|
   t.colors = true
   t.keep_on_error = true
   t.jasmine_config = 'spec/jasmine/support/jasmine.yml'
 end
 
 desc "Run asset compiler"
-Keystone::RakeTask.new(:assets) do |t|
+Keystone::RakeTask.new(:assets => :bootstrap) do |t|
   t.config_file = "config/assets.rb"
   t.output_path = 'public/assets'
+end
+
+desc "Bootstrap system"
+task :bootstrap do
+  require './bootstrap'
 end

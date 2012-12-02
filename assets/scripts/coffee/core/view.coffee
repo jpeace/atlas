@@ -1,4 +1,4 @@
-titan.define class View
+class View
   constructor: (@element) ->
     this.read()
 

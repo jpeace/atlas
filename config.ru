@@ -1,6 +1,4 @@
 require './bootstrap'
-require './app'
-require 'keystone'
 
 if ENV['RACK_ENV'] == 'development'
   map '/assets' do

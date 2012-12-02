@@ -13,34 +13,34 @@ describe 'View', ->
     expect(this.in_spec()).toBe(35)
 
   describe 'with a simple template', ->
-    subject = null 
-    jq = null
-    html = 
+    _subject = null 
+    _jq = null
+    _html = 
       '<div data-view="Test">
         <div id="name" data-property="name">Bob Golly</div>
         <input id="age" data-property="age" value="25" />
       </div>'
       
     beforeEach ->
-      jq = $(html)
-      subject = new titan.classes.View(jq)
+      _jq = $(_html)
+      _subject = new titan.core.View(_jq)
 
     it 'binds to a model', ->
-      subject.bind({name:'Jarrod',age:30})
+      _subject.bind({name:'Jarrod',age:30})
       
-      expect(jq.find('#name').html()).toBe 'Jarrod'
-      expect(jq.find('#age').val()).toBe '30'
+      expect(_jq.find('#name').html()).toBe 'Jarrod'
+      expect(_jq.find('#age').val()).toBe '30'
 
     it 'reads from the dom', ->
-      model = subject.read()
+      model = _subject.read()
 
       expect(model.name).toBe 'Bob Golly'
       expect(model.age).toBe '25'
 
     it 'only reads from inputs', ->
-      jq.find('#name').html('Changed')
-      jq.find('#age').val('35')
-      model = subject.read()
+      _jq.find('#name').html('Changed')
+      _jq.find('#age').val('35')
+      model = _subject.read()
 
       expect(model.name).toBe 'Bob Golly'
       expect(model.age).toBe '35'

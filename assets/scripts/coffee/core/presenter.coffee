@@ -1,3 +1,3 @@
-titan.define class Presenter
+class Presenter
   setView: (view) =>
     @view = view

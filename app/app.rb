@@ -4,6 +4,8 @@ require 'json'
 class App < Sinatra::Base
   include Keystone::Server::Helpers
 
+  set :root, "#{File.dirname(__FILE__)}/../"
+
   get '/' do
     erb :main
   end

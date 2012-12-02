@@ -1,8 +1,9 @@
 assets_are_in ENV['ASSET_PATH']
+add_tools Titan::Keystone::AssetTools
 
 asset 'titan.js' do |a|
   a.scan 'scripts/coffee', 'scripts/js'
-  a.toolchain :coffeescript, :require
+  a.toolchain :export_platform_symbols, :coffeescript, :require
   a.post_build :closure
 end
 
