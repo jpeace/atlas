@@ -1,5 +1,5 @@
-require 'jquery'
-require 'underscore'
+require 'lib/jquery'
+require 'lib/underscore'
 
 require 'titan'
 require 'core/view'

@@ -1,4 +1,4 @@
-require 'amplify'
+require 'lib/amplify'
 
 amplify.request.decoders.entityResponse = 
   (data, status, xhr, success, error) ->
