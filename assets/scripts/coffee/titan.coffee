@@ -1,12 +1,25 @@
+require 'lib/underscore'
+
 class Titan
-  constructor: ->
-    @core = {}
-    @presenters = {}
-    @helpers = {}
-    
+  core :
+    binding: {}
+  presenters : {}
+  helpers : {}
+  
   add_helper: (name, fn) =>
     @helpers[name] = fn if _.isFunction(fn)
 
+  add_constant: (namespace, object) =>
+    ref = @ensure_namespace(namespace)
+    ref[key] = value for key, value of object
+
+  ensure_namespace: (namespace) =>
+    current_ref = this
+    namespace.split('.').forEach (part) ->
+      current_ref[part] = {} unless current_ref[part]?
+      current_ref = current_ref[part]
+    return current_ref
+  
 _t = new Titan();
-window.titan = _t
-window.__ = _t.helpers
+(exports ? this).titan = _t
+(exports ? this).__ = _t.helpers
