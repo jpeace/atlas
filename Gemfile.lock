@@ -1,6 +1,6 @@
 GIT
   remote: git@bitbucket.org:musicone/keystone.git
-  revision: 728867f7b9559b6cd27100a82099c587770c4f97
+  revision: ba0326446e67c442d90af31e3b9b52fba8d18361
   specs:
     keystone (0.0.1)
       closure-compiler
