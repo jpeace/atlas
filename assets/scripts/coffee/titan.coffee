@@ -1,15 +1,12 @@
 require 'lib/underscore'
 
 class Titan
-  core :
-    binding: {}
-  presenters : {}
   helpers : {}
   
   add_helper: (name, fn) ->
     @helpers[name] = fn if _.isFunction(fn)
 
-  add_constant: (namespace, object) ->
+  export: (namespace, object) ->
     ref = @ensure_namespace(namespace)
     ref[key] = value for key, value of object
 

@@ -11,10 +11,8 @@ module Titan
           asset.type == ::Keystone::Types::Coffeescript && @platform_namespaces.any? {|ns| asset.path[/^#{ns}/]}
         end
         def transform(asset)
-          namespace = @platform_namespaces.find {|ns| asset.path[/^#{ns}/]}
-          raise "Could not find platform namespace for #{asset.name}" if namespace.nil?
-
-          "titan.#{asset.path.gsub('/', '.')}.#{class_name_from_asset_name(asset.name)} = #{asset.content}"
+          namespace = asset.path.gsub('/', '.')
+          "titan.ensure_namespace('#{namespace}')\ntitan.#{namespace}.#{class_name_from_asset_name(asset.name)} = #{asset.content}"
         end
 
         private
