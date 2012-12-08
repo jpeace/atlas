@@ -12,7 +12,7 @@ class Titan
 
   ensure_namespace: (namespace) ->
     current_ref = this
-    namespace.split('.').forEach (part) ->
+    for part in namespace.split('.')
       current_ref[part] = {} unless current_ref[part]?
       current_ref = current_ref[part]
     return current_ref

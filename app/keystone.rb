@@ -12,7 +12,7 @@ module Titan
         end
         def transform(asset)
           namespace = asset.path.gsub('/', '.')
-          "titan.ensure_namespace('#{namespace}')\ntitan.#{namespace}.#{class_name_from_asset_name(asset.name)} = #{asset.content}"
+          "titan.ensure_namespace('#{namespace}').#{class_name_from_asset_name(asset.name)} = #{asset.content}"
         end
 
         private
