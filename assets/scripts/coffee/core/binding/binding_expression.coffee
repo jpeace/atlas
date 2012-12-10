@@ -7,25 +7,32 @@ class BindingExpression
   parse: (expression) ->
     @bindings = []
     for expr in expression.split(';')
-      [bound,target] = (s.trim() for s in expr.split(':'))
-      unless target?
-        target = bound
-        bound = 'display'
+      [targetExpr,sourceExpr] = (s.trim() for s in expr.split(':'))
+      unless sourceExpr?
+        sourceExpr = targetExpr
+        targetExpr = 'display'
 
       binding = new titan.core.binding.Binding()
-      binding.boundAttribute = @boundAttributeFromString(bound)
-      binding.targets = @targetsForBoundAttribute(binding.boundAttribute)
+      binding.target = @targetFromExpression(targetExpr)
+      binding.sources = @sourcesForTarget(binding.target)
 
       @bindings.push(binding)
 
-  boundAttributeFromString: (str) ->
-    switch str
+  targetFromExpression: (expr) ->
+    switch expr
       when 'display' then titan.core.binding.display
       when 'class' then titan.core.binding.class
       when 'background-color' then titan.core.binding.backgroundColor
-      else throw new Error("Did not recognize bound attribute #{str}")
+      else throw new Error("Did not recognize target #{expr}")
 
-  targetsForBoundAttribute: (boundAttribute) ->
-    switch boundAttribute
+  sourcesForTarget: (target) ->
+    switch target
       when titan.core.binding.display then [titan.core.binding.model, titan.core.binding.presenter]
       else [titan.core.binding.presenter, titan.core.binding.model]
+
+# class DisplayAttributeDescriptor
+#   attribute: ->
+#     titan.core.binding.display
+#   targets: ->
+#     [titan.core.binding.model, titan.core.binding.presenter]
+#   parseTargetExpression: (expr) ->

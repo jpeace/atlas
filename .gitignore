@@ -6,3 +6,4 @@ vendor
 public/assets/titan.js
 public/assets/titan.css
 .DS_Store
+src
