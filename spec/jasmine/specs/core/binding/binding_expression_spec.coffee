@@ -1,4 +1,4 @@
-require 'core/binding/binding_expression'
+require 'core/binding'
 
 getBindings = (expr) ->
   new titan.core.binding.BindingExpression(expr).bindings
@@ -32,9 +32,9 @@ describe 'Binding Expression', ->
       expect(displayBinding().target).toBe(titan.core.binding.display)
 
     it 'correctly determines sources', ->
-    sources = displayBinding().sources
-    expect(sources[0]).toBe(titan.core.binding.model)
-    expect(sources[1]).toBe(titan.core.binding.presenter)
+      sources = displayBinding().sources
+      expect(sources[0]).toBe(titan.core.binding.model)
+      expect(sources[1]).toBe(titan.core.binding.presenter)
 
     it 'correctly determines properties', ->
       expect(displayBinding().properties).toBe(['value'])

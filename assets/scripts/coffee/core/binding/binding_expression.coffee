@@ -1,6 +1,5 @@
 class BindingExpression
-  require 'core/binding/binding'
-
+  
   constructor: (expression) ->
     @parse(expression)
 
@@ -12,27 +11,20 @@ class BindingExpression
         sourceExpr = targetExpr
         targetExpr = 'display'
 
-      binding = new titan.core.binding.Binding()
-      binding.target = @targetFromExpression(targetExpr)
-      binding.sources = @sourcesForTarget(binding.target)
+      target = @targetFromExpression(targetExpr)
+      for b in titan.core.binding.bindings
+        if b.target() is target
+          binding = new b(sourceExpr)
+          break
 
-      @bindings.push(binding)
+      if binding?
+        @bindings.push(binding)
+      else
+        throw new Error("Did not find binding for target #{target}")
 
-  targetFromExpression: (expr) ->
-    switch expr
+  targetFromExpression: (targetExpression) ->
+    switch targetExpression
       when 'display' then titan.core.binding.display
       when 'class' then titan.core.binding.class
       when 'background-color' then titan.core.binding.backgroundColor
-      else throw new Error("Did not recognize target #{expr}")
-
-  sourcesForTarget: (target) ->
-    switch target
-      when titan.core.binding.display then [titan.core.binding.model, titan.core.binding.presenter]
-      else [titan.core.binding.presenter, titan.core.binding.model]
-
-# class DisplayAttributeDescriptor
-#   attribute: ->
-#     titan.core.binding.display
-#   targets: ->
-#     [titan.core.binding.model, titan.core.binding.presenter]
-#   parseTargetExpression: (expr) ->
+      else throw new Error("Did not recognize target #{targetExpression}")
