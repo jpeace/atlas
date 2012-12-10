@@ -16,11 +16,4 @@ binding =
   model: 'model'
   presenter: 'presenter'
 
-  # Bindings
-  bindings: [
-    titan.core.binding.bindings.Display, 
-    titan.core.binding.bindings.Class,
-    titan.core.binding.bindings.BackgroundColor
-    ]
-
 titan.export('core.binding', binding)
