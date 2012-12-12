@@ -1,0 +1,1 @@
+ENV['ATLAS_ASSET_PATH'] = "#{File.expand_path(File.dirname(__FILE__))}/../../../src"
