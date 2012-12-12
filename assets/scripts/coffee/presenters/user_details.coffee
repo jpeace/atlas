@@ -1,10 +1,15 @@
 class UserDetails extends titan.core.Presenter
   loadClicked: =>
-    __.loadById 5, (data) =>
-      @view.bind(data)
+    # @model.user.firstName = asdfadsf
+    @user.firstName = afadsfa
+    @event.title = afadfsas
 
-  # model: ->
-  #   prop1: 'value'
-  #   prop2:
-  #     prop3: 'value'
-  #     prop4: 'value'
+    __.loadById 5, (data) =>
+      @user.firstName = data
+      @bind()
+
+  model: ->
+    user: @user
+    event: @event
+
+# @view.bind(@model())

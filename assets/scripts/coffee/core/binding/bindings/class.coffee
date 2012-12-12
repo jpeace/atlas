@@ -3,5 +3,12 @@ class Class extends titan.core.binding.bindings.Base
     titan.core.binding.class
   this.sources = ->
     [titan.core.binding.presenter, titan.core.binding.model]
-  
-  parseSourceExpression: (expr) ->
+
+  parseSourceExpression: (sourceExpression) ->
+    super(sourceExpression)
+    baseProperty = @properties[0]
+    @properties = [
+      "is#{baseProperty.capitalize()}", 
+      "should#{baseProperty.capitalize()}",
+      baseProperty
+      ]

@@ -3,5 +3,3 @@ class BackgroundColor extends titan.core.binding.bindings.Base
     titan.core.binding.backgroundColor
   this.sources = ->
     [titan.core.binding.presenter, titan.core.binding.model]
-  
-  parseSourceExpression: (expr) ->

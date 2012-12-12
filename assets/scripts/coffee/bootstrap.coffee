@@ -2,6 +2,7 @@ require 'lib/jquery'
 require 'lib/underscore'
 
 require 'titan'
+require 'core/patches'
 require 'core/view'
 require 'core/presenter'
 require 'core/amplify'

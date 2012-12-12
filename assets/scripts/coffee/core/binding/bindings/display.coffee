@@ -3,5 +3,3 @@ class Display extends titan.core.binding.bindings.Base
     titan.core.binding.display
   this.sources = ->
     [titan.core.binding.model, titan.core.binding.presenter]
-
-  parseSourceExpression: (expr) ->
