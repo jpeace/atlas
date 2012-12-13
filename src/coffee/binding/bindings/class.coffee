@@ -1,8 +1,8 @@
-class Class extends atlas.core.binding.bindings.Base
+class Class extends atlas.binding.bindings.Base
   this.target = ->
-    atlas.core.binding.class
+    atlas.binding.class
   this.sources = ->
-    [atlas.core.binding.presenter, atlas.core.binding.model]
+    [atlas.binding.presenter, atlas.binding.model]
 
   parseSourceExpression: (sourceExpression) ->
     super(sourceExpression)

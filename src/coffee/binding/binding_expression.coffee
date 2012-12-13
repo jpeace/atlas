@@ -12,7 +12,7 @@ class BindingExpression
         targetExpr = 'display'
 
       target = @targetFromExpression(targetExpr)
-      for name, binding of atlas.core.binding.bindings
+      for name, binding of atlas.binding.bindings
         continue if name is 'Base'
         if binding.target() is target
           foundBinding = new binding(sourceExpr)
@@ -25,7 +25,7 @@ class BindingExpression
 
   targetFromExpression: (targetExpression) ->
     switch targetExpression
-      when 'display' then atlas.core.binding.display
-      when 'class' then atlas.core.binding.class
-      when 'background-color' then atlas.core.binding.backgroundColor
+      when 'display' then atlas.binding.display
+      when 'class' then atlas.binding.class
+      when 'background-color' then atlas.binding.backgroundColor
       else throw new Error("Did not recognize target #{targetExpression}")
