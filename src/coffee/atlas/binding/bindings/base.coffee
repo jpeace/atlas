@@ -7,7 +7,7 @@ class Base
   this.sources = ->
     []
 
-  constructor: (sourceExpression) ->
+  constructor: (@element, sourceExpression) ->
     @target = this.constructor.target()
     @sources = this.constructor.sources()
     @parseSourceExpression(sourceExpression)

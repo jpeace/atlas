@@ -1,7 +1,8 @@
 require 'atlas/binding'
 
+emptyElement = tests.dom.emptyElement
 getBinding = (sourceExpression) ->
-  new atlas.binding.bindings.Base(sourceExpression)
+  new atlas.binding.bindings.Base(emptyElement, sourceExpression)
 simpleBinding = ->
   getBinding('value')
 bindingWithExplicitValues = ->
@@ -14,8 +15,11 @@ bindingWithExplicitValueAndSourceProperty = ->
   getBinding('on|off(func)')
 
 describe 'Bindings', ->
+  it 'throws an exception when no element is given', ->
+    expect(-> new atlas.binding.bindings.Base(null, 'value')).toThrow()
+
   it 'throws an exception with a malformed source expression', ->
-    expect(-> new atlas.binding.bindings.Base('bad value')).toThrow()
+    expect(-> new atlas.binding.bindings.Base(emptyElement, 'bad value')).toThrow()
     
   describe 'source expressions', ->
     it 'can be simple', ->
