@@ -1,5 +1,13 @@
 module Atlas
   module Keystone
+    @@compiler = nil
+    def compiler
+      if @@compiler.nil?
+        @@compiler = Keystone.bootstrap("#{File.expand_path(File.dirname(__FILE__))}/../config/assets.rb").compiler('atlas.js')
+      end
+      @@compiler
+    end
+
     module AssetTools
       class ExportPlatformSymbols
         include ::Keystone::AssetTool
