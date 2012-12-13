@@ -16,10 +16,10 @@ module Atlas
           @platform_namespaces = ['core', 'binding']
         end
         def should_run?(asset)
-          asset.type == ::Keystone::Types::Coffeescript && @platform_namespaces.any? {|ns| asset.path[/^#{ns}/]}
+          asset.type == ::Keystone::Types::Coffeescript && @platform_namespaces.any? {|ns| asset.path[/^atlas\/#{ns}/]}
         end
         def transform(asset)
-          namespace = asset.path.gsub('/', '.')
+          namespace = asset.path.gsub(/^atlas\//, '').gsub('/', '.')
           "atlas.ensure_namespace('#{namespace}').#{class_name_from_asset_name(asset.name)} = #{asset.content}"
         end
 

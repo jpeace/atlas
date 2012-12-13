@@ -1,4 +1,4 @@
-require 'binding'
+require 'atlas/binding'
 
 getBinding = (sourceExpression) ->
   new atlas.binding.bindings.Base(sourceExpression)

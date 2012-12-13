@@ -2,10 +2,9 @@ require 'lib/jquery'
 require 'lib/underscore'
 
 require 'atlas'
-require 'core/patches'
-require 'core/view'
-require 'core/presenter'
-require 'core/amplify'
+require 'atlas/core/patches'
+require 'atlas/core/view'
+require 'atlas/core/presenter'
 
 class Bootstrapper
   constructor: (@jq) ->
