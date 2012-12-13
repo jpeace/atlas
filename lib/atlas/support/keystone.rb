@@ -3,7 +3,7 @@ module Atlas
     @@compiler = nil
     def self.compiler
       if @@compiler.nil?
-        @@compiler = Keystone.bootstrap("#{File.expand_path(File.dirname(__FILE__))}/../config/assets.rb").compiler('atlas.js')
+        @@compiler = ::Keystone.bootstrap("#{File.expand_path(File.dirname(__FILE__))}/../config/assets.rb").compiler('atlas.js')
       end
       @@compiler
     end
