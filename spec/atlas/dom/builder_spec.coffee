@@ -1,4 +1,4 @@
-require 'atlas/dom'
+Builder = require 'atlas/dom/builder'
 
 html =  """
         <h1>Title</h1>
@@ -11,7 +11,7 @@ html =  """
         """
 
 getBuilder = ->
-  new atlas.dom.Builder(window.document)
+  new Builder(window.document)
 
 describe 'DOM Builder', ->
   it 'can build elements from HTML strings', ->

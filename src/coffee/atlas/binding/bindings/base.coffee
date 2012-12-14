@@ -16,6 +16,8 @@ class Base
 
   parseSourceExpression: (sourceExpression) ->
     matches = /^(\w+)(\|(\w+))?(\((not )?(\w+)\))?$/.exec(sourceExpression)
+    throw new Error("Could not parse source expression #{sourceExpression}") unless matches?
+  
     # $1 - source property name/true value
     # $2 - has explicit values?
     # $3 - false value

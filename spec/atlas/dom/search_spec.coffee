@@ -1,4 +1,4 @@
-require 'atlas/dom'
+Search = require 'atlas/dom/search'
 
 documentWithAttributes =  """
                           <div data-attr="value">
@@ -16,7 +16,7 @@ documentWithAttributes =  """
                           """
 
 getSearch = (html) ->
-  new atlas.dom.Search(tests.dom.elementFromString(html))
+  new Search(tests.dom.elementFromString(html))
 
 describe 'DOM Search', ->
   it 'can find elements by attribute', ->

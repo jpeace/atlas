@@ -12,3 +12,5 @@ class Search
         if el.getAttribute(attribute)?
           matchingElements.push(el)
       return matchingElements
+
+return Search

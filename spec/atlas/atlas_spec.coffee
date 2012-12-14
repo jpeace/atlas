@@ -1,9 +1,9 @@
 describe 'Global Atlas object', ->
   it 'is made available through the atlas symbol', ->
-    expect(atlas).not.toBe(null)
+    expect(atlas).not.toBeNull()
 
   it 'exports a double underscore to access helpers', ->
-    expect(__).not.toBe(null)
+    expect(__).not.toBeNull()
 
   it 'supports registration of new helper methods', ->
     atlas.add_helper 'myHelper', ->

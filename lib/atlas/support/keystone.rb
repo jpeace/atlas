@@ -13,7 +13,7 @@ module Atlas
         include ::Keystone::AssetTool
 
         def initialize
-          @platform_namespaces = ['core', 'binding', 'dom']
+          @platform_namespaces = ['core', 'binding']
         end
         def should_run?(asset)
           asset.type == ::Keystone::Types::Coffeescript && @platform_namespaces.any? {|ns| asset.path[/^atlas\/#{ns}/]}
