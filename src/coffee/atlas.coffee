@@ -1,7 +1,8 @@
 require 'lib/underscore'
 
 class Atlas
-  helpers : {}
+  helpers: {}
+  presenters: {}
   
   add_helper: (name, fn) ->
     @helpers[name] = fn if _.isFunction(fn)

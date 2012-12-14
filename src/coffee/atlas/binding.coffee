@@ -6,7 +6,7 @@ require 'atlas/binding/bindings/display'
 require 'atlas/binding/bindings/class'
 require 'atlas/binding/bindings/background_color'
 
-binding =
+atlas.export 'binding',
   # Targets
   display: 'display'
   class: 'class'
@@ -15,5 +15,3 @@ binding =
   # Sources
   model: 'model'
   presenter: 'presenter'
-
-atlas.export('binding', binding)

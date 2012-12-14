@@ -4,3 +4,4 @@ class Presenter
   bindingContext: ->
     view: @view
     presenter: this
+  model: ->

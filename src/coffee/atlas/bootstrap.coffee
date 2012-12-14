@@ -5,19 +5,21 @@ require 'atlas'
 require 'atlas/core/patches'
 require 'atlas/core/view'
 require 'atlas/core/presenter'
+  
+atlas.Bootstrapper = class Bootstrapper
+  presenters: []
 
-class Bootstrapper
-  constructor: (@jq) ->
+  constructor: (@element) ->
 
   bootstrap: ->
-    @jq('.view').each (i, el) =>
-      presenter = new atlas.presenters[el.getAttribute('data-presenter')]()
-      presenter.setView(new atlas.core.View(el))
-      $(el).find('button').each ->
-        btnName = this.getAttribute('data-name')
-        if btnName? && _.isFunction(presenter["#{btnName}Clicked"])
-          $(this).click(presenter["#{btnName}Clicked"])
+    # @jq('.view').each (i, el) =>
+    #   presenter = new atlas.presenters[el.getAttribute('data-presenter')]()
+    #   presenter.setView(new atlas.core.View(el))
+    #   $(el).find('button').each ->
+    #     btnName = this.getAttribute('data-name')
+    #     if btnName? && _.isFunction(presenter["#{btnName}Clicked"])
+    #       $(this).click(presenter["#{btnName}Clicked"])
 
 $(->
-  new Bootstrapper(jQuery).bootstrap();
+  new atlas.Bootstrapper(window.document.documentElement).bootstrap();
 )

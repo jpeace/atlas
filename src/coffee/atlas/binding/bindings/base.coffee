@@ -1,4 +1,5 @@
 class Base
+  element: null
   properties: []
   possibleValues: null
 
@@ -7,7 +8,8 @@ class Base
   this.sources = ->
     []
 
-  constructor: (@element, sourceExpression) ->
+  constructor: (sourceExpression) ->
+    @element = null
     @target = this.constructor.target()
     @sources = this.constructor.sources()
     @parseSourceExpression(sourceExpression)
