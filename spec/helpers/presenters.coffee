@@ -1,5 +1,8 @@
-atlas.ensure_namespace('presenters').PresenterOne = class PresenterOne
-  name: 'PresenterOne'
+atlas.ensure_namespace('presenters').One = class PresenterOne
+  name: 'One'
 
-atlas.ensure_namespace('presenters.ns').PresenterTwo = class PresenterTwo
-  name: 'PresenterTwo'
+atlas.ensure_namespace('presenters').Two = class PresenterTwo
+  name: 'Two'
+
+atlas.ensure_namespace('presenters.ns').Two = class PresenterTwo
+  name: 'Two'

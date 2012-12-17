@@ -6,10 +6,12 @@ tests.dom.elementFromString = (html) ->
   return div
 
 tests.dom.simpleDocument =  """
-                            <div data-presenter="PresenterOne">
+                            <div data-presenter="One">
                             </div>
-                            <div data-presenter="ns.PresenterTwo">
+                            <div data-presenter="Two">
                             </div>
                             """
+
+tests.dom.namespacedDocument = """<div data-presenter="One"></div><div data-presenter="ns.Two"></div>"""
 
 tests.dom.emptyElement = document.createElement('div')
