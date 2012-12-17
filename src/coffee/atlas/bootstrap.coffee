@@ -1,4 +1,3 @@
-require 'lib/jquery'
 require 'lib/underscore'
 
 require 'atlas'
@@ -32,7 +31,7 @@ class Bootstrapper
     #     if btnName? && _.isFunction(presenter["#{btnName}Clicked"])
     #       $(this).click(presenter["#{btnName}Clicked"])
 
-$(->
+__$(->
   new Bootstrapper(window.document.documentElement).bootstrap();
 )
 
