@@ -4,11 +4,11 @@ class Events
   addEvent: (event, fn) ->
     if @element.addEventListener
       @element.addEventListener(event, fn, false)
-    else if elem.attachEvent
-      elem.attachEvent("on#{event}", fn);
+    else if @element.attachEvent
+      @element.attachEvent("on#{event}", fn);
     else
-      old = if elem["on#{event}"]? then elem["on#{event}"] else ->
-      elem["on#{event}"] = (e) ->
+      old = if @element["on#{event}"]? then @element["on#{event}"] else ->
+      @element["on#{event}"] = (e) ->
         unless e?
           e = window.event;
         old.call(this, e);

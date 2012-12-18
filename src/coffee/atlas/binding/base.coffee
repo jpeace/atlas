@@ -1,17 +1,20 @@
 class Base
-  element: null
-  properties: []
-  possibleValues: null
-
   this.target = ->
     null
   this.sources = ->
     []
 
-  constructor: (sourceExpression) ->
+  constructor: (sourceExpression, context) ->
+    context ?= {}
+
     @element = null
     @target = this.constructor.target()
     @sources = this.constructor.sources()
+    @properties = []
+    @possibleValues = null
+    
+    @modelPath = context.modelPath ? ''
+    
     @parseSourceExpression(sourceExpression)
 
   parseSourceExpression: (sourceExpression) ->

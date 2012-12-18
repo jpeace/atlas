@@ -1,7 +1,7 @@
 require 'atlas/binding/binder'
 require 'atlas/binding/binding_expression'
 
-require 'atlas/binding/bindings/base'
+require 'atlas/binding/base'
 require 'atlas/binding/bindings/display'
 require 'atlas/binding/bindings/class'
 require 'atlas/binding/bindings/background_color'

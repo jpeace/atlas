@@ -1,6 +1,6 @@
 class BindingExpression
   
-  constructor: (expression) ->
+  constructor: (expression, @context) ->
     @parse(expression)
 
   parse: (expression) ->
@@ -15,7 +15,7 @@ class BindingExpression
       for name, binding of atlas.binding.bindings
         continue if name is 'Base'
         if binding.target() is target
-          foundBinding = new binding(sourceExpr)
+          foundBinding = new binding(sourceExpr, @context)
           break
 
       if foundBinding?

@@ -1,16 +1,32 @@
+require 'atlas/core/view'
+
+elementFromString = tests.dom.elementFromString
+
 describe 'View', ->
-  beforeEach ->
-  afterEach ->
+  describe 'when initializing', ->
+    it 'builds all bindings', ->
+      view = new atlas.core.View(elementFromString(tests.dom.simpleView))
+      expect(view.bindings.length).toBe(3)
 
-  this.in_spec = ->
-    34
+    it 'handles nested bindings correctly', ->
+      view = new atlas.core.View(elementFromString(tests.dom.nestedView))
+      expect(view.bindings.length).toBe(1)
+      expect(view.bindings[0].properties[0]).toBe('city')
+      expect(view.bindings[0].modelPath).toBe('user.contact')
 
-  it 'does something', =>
-    expect(this.in_spec()).toBe(34)
+  # beforeEach ->
+  # afterEach ->
 
-  it 'can spy', =>
-    spyOn(this, 'in_spec').andReturn(35)
-    expect(this.in_spec()).toBe(35)
+  # this.in_spec = ->
+  #   34
+
+  # it 'does something', =>
+  #   expect(this.in_spec()).toBe(34)
+
+  # it 'can spy', =>
+  #   spyOn(this, 'in_spec').andReturn(35)
+  #   expect(this.in_spec()).toBe(35)
+
 
   # describe 'with a simple template', ->
   #   _subject = null 

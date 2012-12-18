@@ -17,6 +17,12 @@ describe 'Binding Expression', ->
   it 'throws an exception for unrecognized target', ->
     expect(-> new atlas.binding.BindingExpression('bad:value')).toThrow()
 
+  it 'provides parsing context', ->
+    context =
+      modelPath: 'some.path'
+    binding = new atlas.binding.BindingExpression('value', context).bindings[0]
+    expect(binding.modelPath).toBe('some.path')
+
   describe 'with a simple expression', ->
     it 'uses a default target of display', ->
       expect(simpleBinding().target).toBe(atlas.binding.display)

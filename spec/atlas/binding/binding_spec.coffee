@@ -1,7 +1,7 @@
 require 'atlas/binding'
 
-getBinding = (sourceExpression) ->
-  new atlas.binding.bindings.Base(sourceExpression)
+getBinding = (sourceExpression, context) ->
+  new atlas.binding.Base(sourceExpression)
 simpleBinding = ->
   getBinding('value')
 bindingWithExplicitValues = ->
@@ -15,8 +15,8 @@ bindingWithExplicitValueAndSourceProperty = ->
 
 describe 'Bindings', ->
   it 'throws an exception with a malformed source expression', ->
-    expect(-> new atlas.binding.bindings.Base('bad value')).toThrow()
-    
+    expect(-> new atlas.binding.Base('bad value')).toThrow()
+
   describe 'source expressions', ->
     it 'can be simple', ->
       binding = simpleBinding()

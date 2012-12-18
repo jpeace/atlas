@@ -1,4 +1,4 @@
-class Class extends atlas.binding.bindings.Base
+class Class extends atlas.binding.Base
   this.target = ->
     atlas.binding.class
   this.sources = ->

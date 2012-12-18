@@ -26,6 +26,19 @@ tests.dom.simpleDocument =  """
                             </div>
                             """
 
+tests.dom.simpleView =  """
+                          <div data-bind="name"></div>
+                          <div data-bind="age;background-color:ageColor"></div>
+                        """
+
+tests.dom.nestedView =  """
+                          <div data-bind="user">
+                            <div data-bind="contact">
+                              <div data-bind="city"></div>
+                            </div>
+                          </div>
+                        """
+
 tests.dom.namespacedDocument = """<div data-presenter="One"></div><div data-presenter="ns.Two"></div>"""
 
 tests.dom.emptyElement = document.createElement('div')
