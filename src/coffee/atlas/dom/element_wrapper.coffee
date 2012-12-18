@@ -11,4 +11,7 @@ class ElementWrapper
     for key, val of obj
       @element.style[key] = val
 
+  addClass: (className) ->
+  removeClass: (className) ->
+
 return ElementWrapper

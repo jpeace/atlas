@@ -18,3 +18,18 @@ describe 'Element Wrapper', ->
     wrapper = new ElementWrapper(el)
 
     expect(wrapper.getStyle('background-color')).toBe('black')
+
+  it 'can add CSS classes', ->
+    el = efs('<div></div>').childNodes[0]
+    wrapper = new ElementWrapper(el)
+    wrapper.addClass('class1')
+    expect(el.className).toBe('class1')
+
+    wrapper.addClass('class2')
+    expect(el.className).toBe('class1 class2')
+
+  it 'can remove CSS classes', ->
+    el = efs('<div class="class1 class2"></div>').childNodes[0]
+    wrapper = new ElementWrapper(el)
+    wrapper.removeClass('class1')
+    expect(el.className).toBe('class2')
