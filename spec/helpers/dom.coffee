@@ -5,6 +5,20 @@ tests.dom.elementFromString = (html) ->
   div.innerHTML = html
   return div
 
+tests.dom.createEvent = (type) ->
+  mouseEvents = ['click', 'mousedown', 'mouseup', 'mouseover', 'mousemove', 'mouseout']
+  
+  if _.contains(mouseEvents, type)
+    e = document.createEvent('MouseEvents')
+    e.initMouseEvent(type, true, true, window, 
+      0, 0, 0, 0, 0, false, false, false, false, 0, null)
+  else
+    e = document.createEvent('HTMLEvents')
+    e.initEvent(type, true, true)
+  return e
+
+
+
 tests.dom.simpleDocument =  """
                             <div data-presenter="One">
                             </div>
