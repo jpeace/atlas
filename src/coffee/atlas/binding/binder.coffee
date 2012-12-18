@@ -1,2 +1,2 @@
 class Binder
-  bind: (element, binding, context) ->
+  this.bind = (element, binding, context) ->

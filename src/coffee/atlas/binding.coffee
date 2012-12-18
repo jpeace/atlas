@@ -15,3 +15,6 @@ atlas.export 'binding',
   # Sources
   model: 'model'
   presenter: 'presenter'
+
+  # Elements
+  editableElements: ['input', 'textarea', 'select']

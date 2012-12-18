@@ -3,6 +3,8 @@ class Base
     null
   this.sources = ->
     []
+  setValue: (value) ->
+  getValue: ->
 
   constructor: (sourceExpression, context) ->
     context ?= {}

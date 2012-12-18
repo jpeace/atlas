@@ -25,6 +25,7 @@ class View
         removeDisplayBinding = innerBindings.length > 0
 
         for binding in outerBindings
+          binding.element = child
           bindings.push(binding) unless binding.target is atlas.binding.display and removeDisplayBinding
         for binding in innerBindings
           bindings.push(binding)

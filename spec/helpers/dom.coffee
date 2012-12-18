@@ -28,7 +28,7 @@ tests.dom.simpleDocument =  """
 
 tests.dom.simpleView =  """
                           <div data-bind="name"></div>
-                          <div data-bind="age;background-color:ageColor"></div>
+                          <span id="age" data-bind="age;background-color:ageColor"></span>
                         """
 
 tests.dom.nestedView =  """

@@ -3,3 +3,5 @@ class Display extends atlas.binding.Base
     atlas.binding.display
   this.sources = ->
     [atlas.binding.model, atlas.binding.presenter]
+
+  setValue: (element, value) ->
