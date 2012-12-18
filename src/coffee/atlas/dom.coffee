@@ -1,6 +1,6 @@
-Search = require 'atlas/dom/search'
 Builder = require 'atlas/dom/builder'
 Events = require 'atlas/dom/events'
+ElementWrapper = require 'atlas/dom/element_wrapper'
 
 domFunction = (arg) ->
   if typeof arg is 'string'
@@ -8,7 +8,7 @@ domFunction = (arg) ->
   else if _.isFunction(arg)
     Events.domReady(window, arg)
   else if arg instanceof Element
-    new Search(arg)
+    new ElementWrapper(arg)
   else
     throw new Error("Unrecognized argument to DOM function #{arg}")
 
