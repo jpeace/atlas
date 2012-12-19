@@ -12,3 +12,18 @@ class Class extends atlas.binding.Base
       "should#{baseProperty.capitalize()}",
       baseProperty
       ]
+
+  setValue: (value, options) ->
+    options ?= {}
+    className = options.className ? ''
+
+    if value is ''
+      __$(@element).removeClass(className)
+    else
+      __$(@element).addClass(value)
+
+  getValue: (options) ->
+    options ?= {}
+    className = options.className ? ''
+
+    if __$(@element).hasClass(className) then className else ''    
