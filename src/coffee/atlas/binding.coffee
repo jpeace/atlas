@@ -1,4 +1,3 @@
-require 'atlas/binding/binder'
 require 'atlas/binding/binding_expression'
 
 require 'atlas/binding/base'

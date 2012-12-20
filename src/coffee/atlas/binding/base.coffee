@@ -12,6 +12,7 @@ class Base
     @element = null
     @target = this.constructor.target()
     @sources = this.constructor.sources()
+    @baseProperty = ''
     @properties = []
     @possibleValues = null
     
@@ -40,3 +41,5 @@ class Base
         @possibleValues = {true: falseValue, false: trueValue}
     else
       @properties = [matches[1]]
+
+    @baseProperty = @properties[0]

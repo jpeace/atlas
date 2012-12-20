@@ -6,24 +6,17 @@ class Class extends atlas.binding.Base
 
   parseSourceExpression: (sourceExpression) ->
     super(sourceExpression)
-    baseProperty = @properties[0]
     @properties = [
-      "is#{baseProperty.capitalize()}", 
-      "should#{baseProperty.capitalize()}",
-      baseProperty
+      "is#{@baseProperty.capitalize()}", 
+      "should#{@baseProperty.capitalize()}",
+      @baseProperty
       ]
 
-  setValue: (value, options) ->
-    options ?= {}
-    className = options.className ? ''
-
+  setValue: (value) ->
     if value is ''
-      __$(@element).removeClass(className)
+      __$(@element).removeClass(@baseProperty)
     else
       __$(@element).addClass(value)
 
   getValue: (options) ->
-    options ?= {}
-    className = options.className ? ''
-
-    if __$(@element).hasClass(className) then className else ''    
+    if __$(@element).hasClass(@baseProperty) then @baseProperty else ''    

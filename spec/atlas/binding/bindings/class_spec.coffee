@@ -8,6 +8,7 @@ describe 'Class binding', ->
       el = efs('<div></div>').childNodes[0]
       binding = new atlas.binding.bindings.Class()
       binding.element = el
+      binding.baseProperty = 'test'
       binding.setValue('test')
       expect(__$(el).hasClass('test')).toBeTruthy()
 
@@ -16,6 +17,7 @@ describe 'Class binding', ->
       el = efs('<div class="test"></div>').childNodes[0]
       binding = new atlas.binding.bindings.Class()
       binding.element = el
+      binding.baseProperty = 'test'
       binding.setValue('', {className:'test'})
       expect(__$(el).hasClass('test')).toBeFalsy()
 
@@ -24,5 +26,12 @@ describe 'Class binding', ->
       el = efs('<div class="test"></div>').childNodes[0]
       binding = new atlas.binding.bindings.Class()
       binding.element = el
-      expect(binding.getValue({className:'test'})).toBe('test')
-      expect(binding.getValue({className:'not-here'})).toBe('')
+      binding.baseProperty = 'test'
+      expect(binding.getValue()).toBe('test')
+
+    it 'returns an empty string if the class does not exist on the element', ->
+      el = efs('<div class="test"></div>').childNodes[0]
+      binding = new atlas.binding.bindings.Class()
+      binding.element = el
+      binding.baseProperty = 'not-here'
+      expect(binding.getValue()).toBe('')

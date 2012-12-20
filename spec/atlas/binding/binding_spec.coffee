@@ -17,6 +17,10 @@ describe 'Bindings', ->
   it 'throws an exception with a malformed source expression', ->
     expect(-> new atlas.binding.Base('bad value')).toThrow()
 
+  it 'preserves the base property name', ->
+    binding = simpleBinding()
+    expect(binding.baseProperty).toBe('value')
+
   describe 'source expressions', ->
     it 'can be simple', ->
       binding = simpleBinding()
