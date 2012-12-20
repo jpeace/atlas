@@ -1,8 +1,5 @@
 atlas.ensure_namespace('presenters').One = 
   class PresenterOne extends atlas.core.Presenter
-    constructor: ->
-      @name = 'One'
-
     isHidden: ->
       'yes'
 
@@ -14,8 +11,8 @@ atlas.ensure_namespace('presenters').One =
       
 atlas.ensure_namespace('presenters').Two = 
   class PresenterTwo extends atlas.core.Presenter
-    constructor: ->
-      @name = 'Two'
+    constructor: (name, view) ->
+      super(name, view)
       @user =
         firstName: 'Bob'
 
@@ -31,8 +28,5 @@ atlas.ensure_namespace('presenters').Two =
 
 atlas.ensure_namespace('presenters.ns').Two = 
   class PresenterTwo extends atlas.core.Presenter
-    constructor: ->
-      @name = 'Two'
-
     value: ->
       5

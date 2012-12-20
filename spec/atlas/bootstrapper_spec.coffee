@@ -20,4 +20,4 @@ describe 'Bootstrapper', ->
     b = getBootstrapper(namespacedDocument)
     expect(b.presenters.length).toBe(2)
     expect(b.presenters[0].name).toBe('One')
-    expect(b.presenters[1].name).toBe('Two')
+    expect(b.presenters[1].name).toBe('ns.Two')

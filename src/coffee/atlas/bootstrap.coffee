@@ -17,9 +17,10 @@ class Bootstrapper
       ctor = __.getProperty(atlas.presenters, presenterName, {followFunctions:false})
       throw new Error("Could not find presenter #{presenterName}") unless ctor?
 
-      presenter = new ctor(new atlas.core.View(el))
+      presenter = new ctor(presenterName, new atlas.core.View(el))
       @hookEvents presenter
       @presenters.push presenter
+    @
 
   hookEvents: ->
 

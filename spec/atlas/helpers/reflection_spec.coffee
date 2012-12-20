@@ -1,12 +1,12 @@
-getObject = ->
-  prop1: 'value'
-  nested:
-    prop2: 'nested'
-  func1: ->
-    prop3:
-      func2: -> 'function'
-
 describe 'Reflection helpers', ->
+  getObject = ->
+    prop1: 'value'
+    nested:
+      prop2: 'nested'
+    func1: ->
+      prop3:
+        func2: -> 'function'
+        
   describe 'properties', ->
     it 'can get simple properties', ->
       expect(__.getProperty(getObject(), 'prop1')).toBe('value')

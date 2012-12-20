@@ -24,6 +24,11 @@ class Binder
     binding.setValue(value)
 
   this.read = (binding, context) ->
-    __.setProperty(context.presenter.model(), binding.modelProperty(), binding.getValue())
+    try
+      value = binding.getValue()
+      value = parseFloat(value) if /^\d+(\.\d+)?$/.test(value)
+
+      __.setProperty(context.presenter.model(), binding.modelProperty(), value)
+    catch error # Tried to set function or property doesn't exist on model - ignore
 
 return Binder

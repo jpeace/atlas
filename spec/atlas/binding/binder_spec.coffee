@@ -1,27 +1,27 @@
-require 'atlas/binding'
-Binder = require 'atlas/binding/binder'
-
-efs = tests.dom.elementFromString
-
-assertBoundValue = (bindingCtor, presenterCtor, value) ->
-  b = new bindingCtor()
-  p = new presenterCtor()
-  
-  spyOn(b, 'setValue')
-  Binder.bind(b, p.bindingContext())
-
-  expect(b.setValue).toHaveBeenCalledWith(value)
-
-assertWrittenProperty = (bindingCtor, presenterCtor, propertyPath) ->
-  b = new bindingCtor()
-  p = new presenterCtor()
-  
-  spyOn(b, 'getValue').andReturn('value')
-  Binder.read(b, p.bindingContext())
-
-  expect(__.getProperty(p.model(), propertyPath)).toBe('value')
-
 describe 'Binder', ->
+  require 'atlas/binding'
+  Binder = require 'atlas/binding/binder'
+
+  efs = tests.dom.elementFromString
+
+  assertBoundValue = (bindingCtor, presenterCtor, value) ->
+    b = new bindingCtor()
+    p = new presenterCtor()
+    
+    spyOn(b, 'setValue')
+    Binder.bind(b, p.bindingContext())
+
+    expect(b.setValue).toHaveBeenCalledWith(value)
+
+  assertWrittenProperty = (bindingCtor, presenterCtor, propertyPath) ->
+    b = new bindingCtor()
+    p = new presenterCtor()
+    
+    spyOn(b, 'getValue').andReturn('value')
+    Binder.read(b, p.bindingContext())
+
+    expect(__.getProperty(p.model(), propertyPath)).toBe('value')
+
   describe 'when binding', ->
     it 'performs simple bindings', ->
       assertBoundValue(tests.bindings.SimpleBinding, atlas.presenters.One, 5)
@@ -46,3 +46,27 @@ describe 'Binder', ->
   describe 'when reading', ->
     it 'writes to the correct model property', ->
       assertWrittenProperty(tests.bindings.ModelPathBinding, atlas.presenters.Two, 'user.firstName')
+
+    it 'parses numbers automatically', ->
+      b = new tests.bindings.ModelPathBinding()
+      p = new atlas.presenters.Two()
+    
+      spyOn(b, 'getValue').andReturn('12')
+      Binder.read(b, p.bindingContext())
+      expect(__.getProperty(p.model(), 'user.firstName')).toBe(12)
+
+    it 'handles strings that contain/start with numbers', ->
+      b = new tests.bindings.ModelPathBinding()
+      p = new atlas.presenters.Two()
+
+      spyOn(b, 'getValue').andReturn('12 Main St')
+      Binder.read(b, p.bindingContext())
+      expect(__.getProperty(p.model(), 'user.firstName')).toBe('12 Main St')
+
+    it 'handles read only/non model properties', ->
+      expect(-> 
+        Binder.read(
+          new tests.bindings.MultiplePropertiesBinding(), 
+          new atlas.presenters.Two().bindingContext()
+        )
+      ).not.toThrow()
