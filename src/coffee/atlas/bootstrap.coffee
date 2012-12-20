@@ -14,7 +14,7 @@ class Bootstrapper
   bootstrap: ->
     for el in __$(@element).elementsWithAttribute('data-presenter')
       presenterName = el.getAttribute('data-presenter')
-      ctor = __.getProperty(atlas.presenters, presenterName)
+      ctor = __.getProperty(atlas.presenters, presenterName, {followFunctions:false})
       throw new Error("Could not find presenter #{presenterName}") unless ctor?
 
       presenter = new ctor(new atlas.core.View(el))

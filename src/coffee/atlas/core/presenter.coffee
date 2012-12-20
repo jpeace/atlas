@@ -1,13 +1,13 @@
 class Presenter
-  model: ->
+  model: -> {}
   
   constructor: (view) ->
     @setView(view)
   setView: (view) ->
     @view = view
   bindingContext: ->
-    view: @view
-    presenter: this
+    presenter: @
+    model: @model()
 
   bind: ->
   read: ->

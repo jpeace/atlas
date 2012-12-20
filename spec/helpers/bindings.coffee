@@ -1,10 +1,20 @@
 atlas.binding.null = null
 
-class BaseTestBinding
+class BaseTestBinding extends atlas.binding.Base
   setValue: (value, options) ->
   getValue: (options) ->
 
-tests.bindings.simpleBinding = 
+tests.bindings.NullBinding = 
+  class NullBinding extends BaseTestBinding
+    constructor: (@element) ->
+      @target = atlas.binding.null
+      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @baseProperty = 'notHere'
+      @properties = ['notHere']
+      @possibleValues = null
+      @modelPath = ''
+
+tests.bindings.SimpleBinding = 
   class SimpleBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
@@ -14,22 +24,32 @@ tests.bindings.simpleBinding =
       @possibleValues = null
       @modelPath = ''
     
-tests.bindings.userBinding = 
-  class UserBinding extends BaseTestBinding
+tests.bindings.ModelPathBinding = 
+  class ModelPathBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
       @sources = [atlas.binding.presenter, atlas.binding.model]
-      @baseProperty = 'name'
-      @properties = ['name']
+      @baseProperty = 'firstName'
+      @properties = ['firstName']
       @possibleValues = null
       @modelPath = 'user'
 
-tests.bindings.complexBinding = 
-  class ComplexBinding extends BaseTestBinding
+tests.bindings.MultiplePropertiesBinding = 
+  class MultiplePropertiesBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
       @sources = [atlas.binding.presenter, atlas.binding.model]
-      @baseProperty = 'value'
-      @properties = ['isValue', 'value']
-      @possibleValues = {true: 'yes', false: 'no'}
+      @baseProperty = 'hidden'
+      @properties = ['isHidden', 'hidden']
+      @possibleValues = null
+      @modelPath = 'user'
+
+tests.bindings.PossibleValuesBinding = 
+  class PossibleValuesBinding extends BaseTestBinding
+    constructor: (@element) ->
+      @target = atlas.binding.null
+      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @baseProperty = 'admin'
+      @properties = ['isAdmin', 'admin']
+      @possibleValues = {true: 'editable', false: 'locked'}
       @modelPath = ''

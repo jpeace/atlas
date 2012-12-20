@@ -3,37 +3,46 @@ Binder = require 'atlas/binding/binder'
 
 efs = tests.dom.elementFromString
 
+assertBoundValue = (bindingCtor, presenterCtor, value) ->
+  b = new bindingCtor()
+  p = new presenterCtor()
+  
+  spyOn(b, 'setValue')
+  Binder.bind(b, p.bindingContext())
+
+  expect(b.setValue).toHaveBeenCalledWith(value)
+
+assertWrittenProperty = (bindingCtor, presenterCtor, propertyPath) ->
+  b = new bindingCtor()
+  p = new presenterCtor()
+  
+  spyOn(b, 'getValue').andReturn('value')
+  Binder.read(b, p.bindingContext())
+
+  expect(__.getProperty(p.model(), propertyPath)).toBe('value')
+
 describe 'Binder', ->
   describe 'when binding', ->
     it 'performs simple bindings', ->
-      b = new tests.bindings.simpleBinding()
-      p = new atlas.presenters.One()
-      el = efs('<div></div>').childNodes[0]
-
-      spyOn(b, 'setValue')
-      Binder.bind(el, b, p.bindingContext())
-
-      expect(b.setValue).toHaveBeenCalledWith(5)
+      assertBoundValue(tests.bindings.SimpleBinding, atlas.presenters.One, 5)
 
     it 'searches the sources for properties', ->
-      b = new tests.bindings.simpleBinding()
-      p = new atlas.presenters.Two()
-      el = efs('<div></div>').childNodes[0]
+      assertBoundValue(tests.bindings.SimpleBinding, atlas.presenters.Two, 5)
       
-      spyOn(b, 'setValue')
-      Binder.bind(el, b, p.bindingContext())
-
-      expect(b.setValue).toHaveBeenCalledWith(5)
-
     it 'works with model paths', ->
-      b = new tests.bindings.userBinding()
-      p = new atlas.presenters.Two()
-      el = efs('<div></div>').childNodes[0]
+      assertBoundValue(tests.bindings.ModelPathBinding, atlas.presenters.Two, 'Bob')
       
-      spyOn(b, 'setValue')
-      Binder.bind(el, b, p.bindingContext())
+    it 'works with multiple properties', ->
+      assertBoundValue(tests.bindings.MultiplePropertiesBinding, atlas.presenters.One, 'yes')
+      assertBoundValue(tests.bindings.MultiplePropertiesBinding, atlas.presenters.Two, 'no')
 
-      expect(b.setValue).toHaveBeenCalledWith('Bob Golly')      
+    it 'works with different possible values', ->
+      assertBoundValue(tests.bindings.PossibleValuesBinding, atlas.presenters.One, 'locked')
+      assertBoundValue(tests.bindings.PossibleValuesBinding, atlas.presenters.Two, 'editable') 
+
+    it 'binds null when no match is found', ->
+      assertBoundValue(tests.bindings.NullBinding, atlas.presenters.One, null)      
 
   describe 'when reading', ->
-  
+    it 'writes to the correct model property', ->
+      assertWrittenProperty(tests.bindings.ModelPathBinding, atlas.presenters.Two, 'user.firstName')

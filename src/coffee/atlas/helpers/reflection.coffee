@@ -1,15 +1,27 @@
-atlas.add_helper 'getProperty', (obj, prop) ->  
+atlas.add_helper 'getProperty', (obj, prop, options) ->  
+  options ?= {}
+  followFunctions = options.followFunctions ? true
+
   current = obj
   for name in prop.split('.')
     return null unless current?
-    current = current[name]
-  return current
+    current = 
+      if _.isFunction(current[name]) and followFunctions
+        current[name]() 
+      else 
+        current[name]
+  return current ? null
 
 atlas.add_helper 'setProperty', (obj, prop, value) ->
   current = obj
   names = prop.split('.')
   for i in [0...(names.length-1)]
-    throw new Error("Property does not exist #{prop}") unless current?
+    verifyPropertyWrite(current, prop)
     current = current[names[i]]
-  throw new Error("Property does not exist #{prop}") unless current[names.last()]
+    
+  verifyPropertyWrite(current[names.last()], prop)
   current[names.last()] = value
+
+verifyPropertyWrite = (property, name) ->
+  throw new Error("Property does not exist #{name}") unless property?
+  throw new Error("Property refers to a function #{name}") if _.isFunction(property)

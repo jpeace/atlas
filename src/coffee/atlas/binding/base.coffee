@@ -20,6 +20,10 @@ class Base
     
     @parseSourceExpression(sourceExpression)
 
+  modelProperty: (name) ->
+    name ?= @baseProperty
+    if @modelPath is '' then name else "#{@modelPath}.#{name}"
+
   parseSourceExpression: (sourceExpression) ->
     matches = /^(\w+)(\|(\w+))?(\((not )?(\w+)\))?$/.exec(sourceExpression)
     throw new Error("Could not parse source expression #{sourceExpression}") unless matches?

@@ -1,8 +1,8 @@
 class View
   require 'atlas/binding'
 
-  constructor: (@element) ->
-    @bindings = @buildBindings(@element, '')
+  constructor: (@root) ->
+    @bindings = @buildBindings(@root, '')
 
   buildBindings: (node, modelPath) ->
     bindings = []
@@ -15,7 +15,9 @@ class View
 
         outerBindings = new atlas.binding.BindingExpression(expression, context).bindings
         displayBinding = _.find(outerBindings, (b) -> b.target is atlas.binding.display)
-        
+
+        # TODO - Look for data-type attribute and transform display binding into list etc. binding
+
         innerModelPath = 
           if displayBinding?
             if modelPath is '' then displayBinding.properties[0] else "#{modelPath}.#{displayBinding.properties[0]}"
@@ -31,35 +33,3 @@ class View
           bindings.push(binding)
         
     return bindings
-
-
-
-
-
-
-
-
-
-
-
-
-  # bind: (model) ->
-    # @model = model
-    # for own prop, val of @model
-    #   $(@element).find("[data-property=#{prop}]").each ->
-    #     if this.tagName.toLowerCase() == 'div'
-    #       this.innerHTML = val
-    #     else
-    #       this.value = val
-
-  # read: ->
-    # @model ?= {}
-    # $(@element).find('input, div').each (i, el) =>
-    #   prop_name = $(el).attr('data-property')
-    #   return unless prop_name?
-      
-    #   if el.tagName.toLowerCase() == 'div'
-    #     @model[prop_name] = el.innerHTML unless @model[prop_name]?
-    #   else
-    #     @model[prop_name] = el.value
-    # return @model
