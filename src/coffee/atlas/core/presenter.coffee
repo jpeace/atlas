@@ -16,6 +16,3 @@ class Presenter
     Binder.bind(b, @bindingContext()) for b in @view.bindings
   read: ->
     Binder.read(b, @bindingContext()) for b in @view.bindings
-  refresh: ->
-    @read()
-    @bind()

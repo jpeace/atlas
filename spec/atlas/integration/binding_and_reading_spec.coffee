@@ -8,12 +8,11 @@ describe 'Binding and reading in presenters', ->
         @user =
           name: 'Joe Blow'
           age: 45
+          agePhrase: ->
+            if @age > 50 then 'too old!' else 'too dumb!'    
 
       model: ->
         user: @user
-
-      agePhrase: ->
-        if @user.age > 50 then 'too old!' else 'too dumb!'
 
       change: (name, age) ->
         @user.name = name
@@ -21,7 +20,8 @@ describe 'Binding and reading in presenters', ->
         @bind()
 
       update: ->
-        @refresh()
+        @read()
+        @bind()
 
   viewHtml =  """
                 <div data-presenter="UserDetails">

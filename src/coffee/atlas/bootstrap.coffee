@@ -20,7 +20,6 @@ class Bootstrapper
       presenter = new ctor(presenterName, new atlas.core.View(el))
       @hookEvents presenter
       @presenters.push presenter
-      presenter.refresh()
     @
 
   hookEvents: (presenter)->
