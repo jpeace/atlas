@@ -1,18 +1,18 @@
 class Events
   constructor: (@element) ->
 
-  addEvent: (event, fn) ->
+  addEvent: (eventName, fn) ->
     if @element.addEventListener
-      @element.addEventListener(event, fn, false)
+      @element.addEventListener(eventName, fn, false)
     else if @element.attachEvent
-      @element.attachEvent("on#{event}", fn);
+      @element.attachEvent("on#{eventName}", fn);
     else
-      old = if @element["on#{event}"]? then @element["on#{event}"] else ->
-      @element["on#{event}"] = (e) ->
+      old = if @element["on#{eventName}"]? then @element["on#{eventName}"] else ->
+      @element["on#{eventName}"] = (e) ->
         unless e?
-          e = window.event;
-        old.call(this, e);
-        fn.call(this, e);
+          e = window.event
+        old.call(this, e)
+        fn.call(this, e)
 
   this.domReady = (win, fn) ->
     # Taken from Diego Perini's contentloaded at https://github.com/dperini/ContentLoaded/blob/master/src/contentloaded.js

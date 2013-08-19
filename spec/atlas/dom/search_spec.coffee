@@ -9,11 +9,19 @@ documentWithAttributes =  """
                               </li>
                             </ul>
                           </div>
-                          <p>
-                            <h1 data-attr=""></h1>
-                            <p data-attr=""></p>
+                          <p>                   
                           </p>
+                          <h1 data-attr=""></h1>
+                          <p data-attr="value"></p>
                           """
+
+documentWithClassNames =  """
+                          <h1 class="myClass"></h1>
+                          <div>
+                            <span class="different myClass"></span>
+                          </div>
+                          """
+
 
 getSearch = (html) ->
   new Search(tests.dom.elementFromString(html))
@@ -22,3 +30,11 @@ describe 'DOM Search', ->
   it 'can find elements by attribute', ->
     elements = getSearch(documentWithAttributes).elementsWithAttribute('data-attr')
     expect(elements.length).toBe(5)
+
+  it 'can find elements with class name', ->
+    elements = getSearch(documentWithClassNames).elementsWithClass('myClass')
+    expect(elements.length).toBe(2)
+
+  it 'can find elements of a given type', ->
+    elements = getSearch(documentWithAttributes).elementsOfType('p')
+    expect(elements.length).toBe(2)

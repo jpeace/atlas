@@ -1,8 +1,10 @@
 class ElementWrapper
   Search = require 'atlas/dom/search'
+  Events = require 'atlas/dom/events'
 
   constructor: (@element) ->
     _.extend(@, new Search(@element))
+    _.extend(@, new Events(@element))
 
   getStyle: (property) ->
     @element.style[property]

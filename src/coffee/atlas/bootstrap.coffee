@@ -20,17 +20,21 @@ class Bootstrapper
       presenter = new ctor(presenterName, new atlas.core.View(el))
       @hookEvents presenter
       @presenters.push presenter
+      presenter.refresh()
     @
 
-  hookEvents: ->
+  hookEvents: (presenter)->
+    eventsToVerbs = 
+      click : 'Clicked'
+      dblclick : 'DoubleClicked'
+      focus : 'GotFocus'
+      blur : 'LostFocus'
 
-    # @jq('.view').each (i, el) =>
-    #   presenter = new atlas.presenters[el.getAttribute('data-presenter')]()
-    #   presenter.setView(new atlas.core.View(el))
-    #   $(el).find('button').each ->
-    #     btnName = this.getAttribute('data-name')
-    #     if btnName? && _.isFunction(presenter["#{btnName}Clicked"])
-    #       $(this).click(presenter["#{btnName}Clicked"])
+    for el in __$(presenter.view.root).elementsWithAttribute('data-name')
+      controlName = el.getAttribute('data-name')
+      for evt, verb of eventsToVerbs
+        if _.isFunction(presenter["#{controlName}#{verb}"])
+          __$(el).addEvent(evt, presenter["#{controlName}#{verb}"])
 
 __$(->
   new Bootstrapper(window.document.documentElement).bootstrap();

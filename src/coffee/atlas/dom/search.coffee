@@ -1,16 +1,25 @@
 class Search
   constructor: (@element)->
 
+  matchElements: (fn)->
+    # Slower fallback for old browsers
+    el for el in @element.getElementsByTagName('*') when fn(el)
+    
   elementsWithAttribute: (attribute)->
     if @element.querySelectorAll?
       @element.querySelectorAll("[#{attribute}]")
     else
-      # Slower fallback for older browsers
-      matchingElements = []
-      allElements = @element.getElementsByTagName('*')
-      for el in allElements
-        if el.getAttribute(attribute)?
-          matchingElements.push(el)
-      return matchingElements
+    @matchElements((el)-> el.getAttribute(attribute)?)
+
+  elementsWithClass: (className)->
+    if @element.getElementsByClassName?
+      @element.getElementsByClassName(className)
+    else if @element.querySelectorAll?
+      @element.querySelectorAll(".#{className}")
+    else
+      @matchElements((el)-> if el.className? then _.contains(el.className.split(' '), className) else false)
+
+  elementsOfType: (tagName)->
+    @element.getElementsByTagName(tagName)
 
 return Search
