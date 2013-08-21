@@ -1,8 +1,8 @@
 class Display extends atlas.binding.Base
   this.target = ->
-    atlas.binding.display
+    atlas.binding.targets.display
   this.sources = ->
-    [atlas.binding.model, atlas.binding.presenter]
+    [atlas.binding.sources.model, atlas.binding.sources.presenter]
 
   setValue: (value) ->
     @element[@displayProperty()] = value

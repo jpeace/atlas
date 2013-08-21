@@ -12,6 +12,9 @@ bindingWithExplicitNegatedSourceProperty = ->
   getBinding('value(not func)')
 bindingWithExplicitValueAndSourceProperty = ->
   getBinding('on|off(func)')
+bindingWithMode = ->
+  getBinding('value as collection')
+
 
 describe 'Bindings', ->
   it 'throws an exception with a malformed source expression', ->
@@ -27,7 +30,8 @@ describe 'Bindings', ->
       expect(binding.properties.length).toBe(1)
       expect(binding.properties[0]).toBe('value')
       expect(binding.possibleValues).toBeNull()
-      
+      expect(binding.mode).toBe(atlas.binding.modes.simple)
+
     it 'can have explicit values', ->
       binding = bindingWithExplicitValues()
       expect(binding.properties.length).toBe(1)
@@ -51,3 +55,9 @@ describe 'Bindings', ->
       expect(binding.properties.length).toBe(1)
       expect(binding.properties[0]).toBe('func')
       expect(binding.possibleValues).toEqual({true:'on', false:'off'})
+
+    it 'can specify a binding mode', ->
+      binding = bindingWithMode()
+      expect(binding.properties.length).toBe(1)
+      expect(binding.properties[0]).toBe('value')
+      expect(binding.mode).toBe(atlas.binding.modes.collection)

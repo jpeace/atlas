@@ -14,7 +14,7 @@ class View
           modelPath: modelPath
 
         outerBindings = new atlas.binding.BindingExpression(expression, context).bindings
-        displayBinding = _.find(outerBindings, (b) -> b.target is atlas.binding.display)
+        displayBinding = _.find(outerBindings, (b) -> b.isDisplay())
 
         # TODO - Look for data-type attribute and transform display binding into list etc. binding
 
@@ -28,8 +28,7 @@ class View
 
         for binding in outerBindings
           binding.element = child
-          bindings.push(binding) unless binding.target is atlas.binding.display and removeDisplayBinding
-        for binding in innerBindings
-          bindings.push(binding)
-        
+          bindings.push(binding) unless binding.isDisplay() and removeDisplayBinding
+        bindings.push(binding) for binding in innerBindings
+    
     return bindings

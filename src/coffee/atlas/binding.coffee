@@ -6,14 +6,17 @@ require 'atlas/binding/bindings/class'
 require 'atlas/binding/bindings/background_color'
 
 atlas.export 'binding',
-  # Targets
-  display: 'display'
-  class: 'class'
-  backgroundColor: 'backgroundColor'
+	modes:
+    simple: 'simple'
+    collection: 'collection'
 
-  # Sources
-  model: 'model'
-  presenter: 'presenter'
+  targets:
+    display: 'display'
+    class: 'class'
+    backgroundColor: 'backgroundColor'
 
-  # Elements
+  sources:
+    model: 'model'
+    presenter: 'presenter'
+
   editableElements: ['input', 'textarea', 'select']

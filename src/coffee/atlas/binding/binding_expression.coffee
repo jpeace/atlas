@@ -25,7 +25,7 @@ class BindingExpression
 
   targetFromExpression: (targetExpression) ->
     switch targetExpression
-      when 'display' then atlas.binding.display
-      when 'class' then atlas.binding.class
-      when 'background-color' then atlas.binding.backgroundColor
+      when 'display' then atlas.binding.targets.display
+      when 'class' then atlas.binding.targets.class
+      when 'background-color' then atlas.binding.targets.backgroundColor
       else throw new Error("Did not recognize target #{targetExpression}")

@@ -25,25 +25,28 @@ describe 'Binding Expression', ->
 
   describe 'with a simple expression', ->
     it 'uses a default target of display', ->
-      expect(simpleBinding().target).toBe(atlas.binding.display)
+      expect(simpleBinding().target).toBe(atlas.binding.targets.display)
 
   describe 'when binding the display target', ->
     it 'correctly sets the target', ->
-      expect(displayBinding().target).toBe(atlas.binding.display)
+      expect(displayBinding().target).toBe(atlas.binding.targets.display)
 
     it 'correctly determines sources', ->
       sources = displayBinding().sources
-      expect(sources[0]).toBe(atlas.binding.model)
-      expect(sources[1]).toBe(atlas.binding.presenter)
+      expect(sources[0]).toBe(atlas.binding.sources.model)
+      expect(sources[1]).toBe(atlas.binding.sources.presenter)
+
+    # describe 'with collections', ->
+
 
   describe 'when binding the class target', ->
     it 'correctly sets the target', ->
-      expect(classBinding().target).toBe(atlas.binding.class)
+      expect(classBinding().target).toBe(atlas.binding.targets.class)
 
     it 'correctly determines sources', ->
       sources = classBinding().sources
-      expect(sources[0]).toBe(atlas.binding.presenter)
-      expect(sources[1]).toBe(atlas.binding.model)
+      expect(sources[0]).toBe(atlas.binding.sources.presenter)
+      expect(sources[1]).toBe(atlas.binding.sources.model)
 
     it 'correctly determines properties', ->
       properties = classBinding().properties
@@ -53,15 +56,15 @@ describe 'Binding Expression', ->
   
   describe 'when binding to the background color property', ->
     it 'correctly sets the target', ->
-      expect(backgroundColorBinding().target).toBe(atlas.binding.backgroundColor)
+      expect(backgroundColorBinding().target).toBe(atlas.binding.targets.backgroundColor)
 
     it 'correctly determines sources', ->
       sources = backgroundColorBinding().sources
-      expect(sources[0]).toBe(atlas.binding.presenter)
-      expect(sources[1]).toBe(atlas.binding.model)
+      expect(sources[0]).toBe(atlas.binding.sources.presenter)
+      expect(sources[1]).toBe(atlas.binding.sources.model)
 
   it 'supports multiple statements', ->
     bindings = multipleStatementBindings()
     expect(bindings.length).toBe(2)
-    expect(bindings[0].target).toBe(atlas.binding.display)
-    expect(bindings[1].target).toBe(atlas.binding.class)
+    expect(bindings[0].target).toBe(atlas.binding.targets.display)
+    expect(bindings[1].target).toBe(atlas.binding.targets.class)

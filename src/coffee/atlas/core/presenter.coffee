@@ -12,7 +12,7 @@ class Presenter
   bindingContext: ->
     presenter: @
     model: @model()
-  bind: ->
+  bind: =>
     Binder.bind(b, @bindingContext()) for b in @view.bindings
-  read: ->
+  read: =>
     Binder.read(b, @bindingContext()) for b in @view.bindings

@@ -1,8 +1,8 @@
 class BackgroundColor extends atlas.binding.Base
   this.target = ->
-    atlas.binding.backgroundColor
+    atlas.binding.targets.backgroundColor
   this.sources = ->
-    [atlas.binding.presenter, atlas.binding.model]
+    [atlas.binding.sources.presenter, atlas.binding.sources.model]
 
   setValue: (value) ->
     __$(@element).setStyle({'background-color':value})

@@ -8,7 +8,7 @@ tests.bindings.NullBinding =
   class NullBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
-      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
       @baseProperty = 'notHere'
       @properties = ['notHere']
       @possibleValues = null
@@ -18,7 +18,7 @@ tests.bindings.SimpleBinding =
   class SimpleBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
-      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
       @baseProperty = 'value'
       @properties = ['value']
       @possibleValues = null
@@ -28,7 +28,7 @@ tests.bindings.ModelPathBinding =
   class ModelPathBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
-      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
       @baseProperty = 'firstName'
       @properties = ['firstName']
       @possibleValues = null
@@ -38,7 +38,7 @@ tests.bindings.MultiplePropertiesBinding =
   class MultiplePropertiesBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
-      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
       @baseProperty = 'hidden'
       @properties = ['isHidden', 'hidden']
       @possibleValues = null
@@ -48,7 +48,7 @@ tests.bindings.PossibleValuesBinding =
   class PossibleValuesBinding extends BaseTestBinding
     constructor: (@element) ->
       @target = atlas.binding.null
-      @sources = [atlas.binding.presenter, atlas.binding.model]
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
       @baseProperty = 'admin'
       @properties = ['isAdmin', 'admin']
       @possibleValues = {true: 'editable', false: 'locked'}

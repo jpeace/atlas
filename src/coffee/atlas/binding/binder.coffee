@@ -8,7 +8,7 @@ class Binder
         throw new Error("Invalid source: #{source}") unless sourceObj?
 
         propertyPath = 
-          if source is atlas.binding.model
+          if source is atlas.binding.sources.model
             binding.modelProperty(propertyName) 
           else 
             propertyName

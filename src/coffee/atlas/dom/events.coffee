@@ -8,7 +8,7 @@ class Events
       @element.attachEvent("on#{eventName}", fn);
     else
       old = if @element["on#{eventName}"]? then @element["on#{eventName}"] else ->
-      @element["on#{eventName}"] = (e) ->
+      @element["on#{eventName}"] = (e) =>
         unless e?
           e = window.event
         old.call(this, e)
