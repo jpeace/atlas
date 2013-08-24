@@ -11,7 +11,7 @@ describe 'Binder', ->
     spyOn(b, 'setValue')
     Binder.bind(b, p.bindingContext())
 
-    expect(b.setValue).toHaveBeenCalledWith(value)
+    expect(b.setValue).toHaveBeenCalledWith(value, jasmine.any(Object))
 
   assertWrittenProperty = (bindingCtor, presenterCtor, propertyPath) ->
     b = new bindingCtor()

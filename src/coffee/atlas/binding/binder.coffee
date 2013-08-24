@@ -21,11 +21,11 @@ class Binder
           break
       break if found
 
-    binding.setValue(value)
+    binding.setValue(value, context)
 
   this.read = (binding, context) ->
     try
-      value = binding.getValue()
+      value = binding.getValue(context)
       value = parseFloat(value) if /^\d+(\.\d+)?$/.test(value)
 
       __.setProperty(context.presenter.model(), binding.modelProperty(), value)

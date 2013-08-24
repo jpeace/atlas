@@ -23,15 +23,9 @@ class Bootstrapper
     @
 
   hookEvents: (presenter)->
-    eventsToVerbs = 
-      click : 'Clicked'
-      dblclick : 'DoubleClicked'
-      focus : 'GotFocus'
-      blur : 'LostFocus'
-
     for el in __$(presenter.view.root).elementsWithAttribute('data-name')
       controlName = el.getAttribute('data-name')
-      for evt, verb of eventsToVerbs
+      for evt, verb of atlas.dom.eventsToVerbs
         if _.isFunction(presenter["#{controlName}#{verb}"])
           __$(el).addEvent(evt, presenter["#{controlName}#{verb}"])
 
