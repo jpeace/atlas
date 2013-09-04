@@ -5,10 +5,12 @@ class Display extends atlas.binding.Base
     [atlas.binding.sources.model, atlas.binding.sources.presenter]
 
   setValue: (value) ->
+    if @format?
+      value = @format.source[@format.method](value, @format.args) if @format.source.canFormat?(value)
     @element[@displayProperty()] = value
 
   getValue: ->
-    @element[@displayProperty()]
+    value = @element[@displayProperty()]
 
   displayProperty: ->
     if _.contains(atlas.binding.editableElements, @element.tagName.toLowerCase())

@@ -4,7 +4,7 @@ require 'jasmine-headless-webkit'
 require 'rspec/core/rake_task'
 require 'keystone'
 
-task :default => :spec
+task :default => [:assets, :spec]
 
 Echoe.new('atlas', '0.0.1') do |p|  
   p.description     = 'UI Framework'
@@ -17,7 +17,7 @@ Echoe.new('atlas', '0.0.1') do |p|
 end  
 
 desc "Runs jasmine specs"
-Jasmine::Headless::Task.new(:spec => :assets) do |t|
+Jasmine::Headless::Task.new(:spec) do |t|
   t.colors = true
   t.keep_on_error = true
   t.jasmine_config = 'spec/support/jasmine.yml'

@@ -41,11 +41,23 @@ describe 'Binder', ->
       assertBoundValue(tests.bindings.PossibleValuesBinding, atlas.presenters.Two, 'editable') 
 
     it 'binds null when no match is found', ->
-      assertBoundValue(tests.bindings.NullBinding, atlas.presenters.One, null)      
+      assertBoundValue(tests.bindings.NullBinding, atlas.presenters.One, null)
 
   describe 'when reading', ->
     it 'writes to the correct model property', ->
       assertWrittenProperty(tests.bindings.ModelPathBinding, atlas.presenters.Two, 'user.firstName')
+
+    it 'parses when there is a data formatter', ->
+      b = new tests.bindings.ModelPathBinding()
+      b.format =
+        source: new atlas.formatters.number(),
+        method: 'currency'
+        args: null
+      p = new atlas.presenters.Two()  
+
+      spyOn(b, 'getValue').andReturn('$24.50')
+      Binder.read(b, p.bindingContext())
+      expect(__.getProperty(p.model(), 'user.firstName')).toBe(24.5)
 
     it 'parses numbers automatically', ->
       b = new tests.bindings.ModelPathBinding()

@@ -13,10 +13,13 @@ class Class extends atlas.binding.Base
       ]
 
   setValue: (value) ->
+    el = __$(@element)
+    el.removeClass(v) for k,v of @possibleValues if @possibleValues?
+  
     if value is ''
-      __$(@element).removeClass(@baseProperty)
+      el.removeClass(@baseProperty)
     else
-      __$(@element).addClass(value)
+      el.addClass(value)
 
   getValue: (options) ->
     if __$(@element).hasClass(@baseProperty) then @baseProperty else ''    

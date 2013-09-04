@@ -32,7 +32,7 @@ class Base
     if @modelPath is '' then name else "#{@modelPath}.#{name}"
 
   parseSourceExpression: (sourceExpression) ->
-    matches = /^(\w+)(\|(\w+))?(\((not )?(\w+)\))?( as (\w+))?$/.exec(sourceExpression)
+    matches = /^([\w\.]+)(\|(\w+))?(\((not )?(\w+)\))?( as (\w+))?$/.exec(sourceExpression)
     throw new Error("Could not parse source expression #{sourceExpression}") unless matches?
   
     # $1 - source property name/true value

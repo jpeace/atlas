@@ -36,3 +36,26 @@ describe 'Display binding', ->
       binding.element = el
 
       expect(binding.getValue()).toBe('Test')
+
+  describe 'with formatting', ->
+    formattedBinding = ->
+      el = efs('<div></div>').childNodes[0]
+      binding = new atlas.binding.bindings.Display()
+      binding.element = el
+      binding.format = 
+        source: new atlas.formatters.test()
+        method: 'emphasize'
+        args: '?'
+      binding
+
+    it 'uses the format when setting the value', ->
+      binding = formattedBinding()
+      binding.setValue('what')
+
+      expect(binding.element.textContent).toBe('what?')
+
+    it 'ignores the format for inappropriate types', ->
+      binding = formattedBinding()
+      binding.setValue(15)
+
+      expect(binding.element.textContent).toBe('15')

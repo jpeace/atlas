@@ -1,4 +1,4 @@
-atlas.add_helper 'getProperty', (obj, prop, options) ->  
+atlas.addHelper 'getProperty', (obj, prop, options) ->  
   options ?= {}
   followFunctions = options.followFunctions ? true
 
@@ -12,7 +12,7 @@ atlas.add_helper 'getProperty', (obj, prop, options) ->
         current[name]
   return current ? null
 
-atlas.add_helper 'setProperty', (obj, prop, value) ->
+atlas.addHelper 'setProperty', (obj, prop, value) ->
   current = obj
   names = prop.split('.')
   for i in [0...(names.length-1)]

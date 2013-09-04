@@ -17,6 +17,9 @@ class View
         displayBinding = _.find(outerBindings, (b) -> b.isDisplay())
         removeDisplayBinding = false
 
+        if child.hasAttribute('data-format') and displayBinding?
+          displayBinding.format = @parseFormatString(child.getAttribute('data-format'))
+
         innerModelPath = 
           if displayBinding?
             if modelPath is '' then displayBinding.properties[0] else "#{modelPath}.#{displayBinding.properties[0]}"
@@ -39,3 +42,22 @@ class View
             bindings.push(binding) unless binding.isDisplay() and removeDisplayBinding
     
     return bindings
+
+  parseFormatString: (formatString) ->
+    matches = /^(\w+)\.(\w+)(\((.+)\))?$/.exec(formatString)
+    throw new Error("Could not parse format string #{formatString}") unless matches?
+
+    formatter = matches[1]
+    method = matches[2]
+    args = matches[4] ? null
+
+    throw new Error("Could not find formatter #{formatter}") unless _.isFunction(atlas.formatters[formatter])
+    source = new atlas.formatters[formatter]()
+
+    throw new Error("Invalid method #{method}") unless _.isFunction(source[method])
+
+    {
+      source: source
+      method: method
+      args: args
+    }

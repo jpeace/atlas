@@ -27,7 +27,7 @@ tests.dom.simpleDocument =  """
                             """
 
 tests.dom.simpleView =  """
-                          <div data-bind="name"></div>
+                          <div data-bind="name" data-format="test.emphasize(!!!)"></div>
                           <span id="age" data-bind="age;background-color:ageColor"></span>
                         """
 

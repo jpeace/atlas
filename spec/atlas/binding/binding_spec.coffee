@@ -4,6 +4,8 @@ getBinding = (sourceExpression, context) ->
   new atlas.binding.Base(sourceExpression)
 simpleBinding = ->
   getBinding('value')
+deeperBinding = ->
+  getBinding('some.value')
 bindingWithExplicitValues = ->
   getBinding('yes|no')
 bindingWithExplicitSourceProperty = ->
@@ -31,6 +33,11 @@ describe 'Bindings', ->
       expect(binding.properties[0]).toBe('value')
       expect(binding.possibleValues).toBeNull()
       expect(binding.mode).toBe(atlas.binding.modes.simple)
+
+    it 'can reference deeper properties', ->
+      binding = deeperBinding()
+      expect(binding.properties.length).toBe(1)
+      expect(binding.properties[0]).toBe('some.value')
 
     it 'can have explicit values', ->
       binding = bindingWithExplicitValues()

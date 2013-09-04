@@ -9,7 +9,7 @@ class Search
     if @element.querySelectorAll?
       @element.querySelectorAll("[#{attribute}]")
     else
-    @matchElements((el)-> el.getAttribute(attribute)?)
+      @matchElements((el)-> el.getAttribute(attribute)?)
 
   elementsWithClass: (className)->
     if @element.getElementsByClassName?

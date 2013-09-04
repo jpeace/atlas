@@ -36,9 +36,6 @@ describe 'Binding Expression', ->
       expect(sources[0]).toBe(atlas.binding.sources.model)
       expect(sources[1]).toBe(atlas.binding.sources.presenter)
 
-    # describe 'with collections', ->
-
-
   describe 'when binding the class target', ->
     it 'correctly sets the target', ->
       expect(classBinding().target).toBe(atlas.binding.targets.class)

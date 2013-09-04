@@ -5,6 +5,8 @@ require 'atlas/binding/bindings/display'
 require 'atlas/binding/bindings/class'
 require 'atlas/binding/bindings/background_color'
 require 'atlas/binding/bindings/collection'
+require 'atlas/binding/formatters/base'
+require 'atlas/binding/formatters/number'
 
 atlas.export 'binding',
 	modes:

@@ -6,7 +6,7 @@ describe 'Global Atlas object', ->
     expect(__).not.toBeNull()
 
   it 'supports registration of new helper methods', ->
-    atlas.add_helper 'myHelper', ->
+    atlas.addHelper 'myHelper', ->
       'I helped!'
     expect(__.myHelper()).toBe('I helped!')
 
