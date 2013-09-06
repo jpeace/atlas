@@ -2,9 +2,6 @@ class NumberFormatter extends atlas.binding.formatters.Base
 	canFormat: (value, args) ->
 		_.isNumber(value)
 
-	canParse: (string, args) ->
-		_.isString(string)
-
 	currency: (value, args) ->
 		options = @argsToOptions(args)
 		

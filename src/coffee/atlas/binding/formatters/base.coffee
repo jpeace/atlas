@@ -1,4 +1,10 @@
 class Base
+	canFormat: (value, args) ->
+		false
+
+	canParse: (string, args) ->
+		_.isString(string)
+
 	argsToOptions: (args) ->
 		options = {}
 		if args?

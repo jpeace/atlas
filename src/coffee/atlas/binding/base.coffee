@@ -9,7 +9,6 @@ class Base
   constructor: (sourceExpression, context) ->
     context ?= {}
 
-    @element = null
     @mode = atlas.binding.modes.simple
     @target = this.constructor.target()
     @sources = this.constructor.sources()
