@@ -30,6 +30,27 @@ class Base
     name ?= @baseProperty
     if @modelPath is '' then name else "#{@modelPath}.#{name}"
 
+  resolveAccessor: (context)->
+    for source in @sources
+      for propertyName in @properties
+        sourceObj = __.getProperty(context, source)
+        throw new Error("Invalid source: #{source}") unless sourceObj?
+
+        propertyPath = 
+          if source is atlas.binding.sources.model
+            @modelProperty(propertyName) 
+          else 
+            propertyName
+
+        val = __.getProperty(sourceObj, propertyPath)
+        if val?
+          return {
+            source: sourceObj,
+            path: propertyPath,
+            currentValue: val
+          }
+    throw new Error("Could not resolve accessor")
+
   parseSourceExpression: (sourceExpression) ->
     matches = /^([\w\.]+)(\|(\w+))?(\((not )?(\w+)\))?( as (\w+))?$/.exec(sourceExpression)
     throw new Error("Could not parse source expression #{sourceExpression}") unless matches?

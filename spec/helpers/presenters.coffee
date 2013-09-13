@@ -15,6 +15,7 @@ atlas.ensureNamespace('presenters').Two =
       super(name, view)
       @user =
         firstName: 'Bob'
+        friends: {name:'Rob',name:'Gob'}
 
     hidden: ->
       'no'
@@ -25,6 +26,12 @@ atlas.ensureNamespace('presenters').Two =
     model: ->
       value: 5
       user: @user
+
+    changeClicked: =>
+      @user.firstName = 'Changed'
+
+    otherClicked: =>
+
 
 atlas.ensureNamespace('presenters.ns').Two = 
   class PresenterTwo extends atlas.core.Presenter

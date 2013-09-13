@@ -43,17 +43,21 @@ class Collection extends atlas.binding.Base
 			@containerNode.removeChild(node) for node in (toRemove ? [])
 		@root.innerHTML = ''
 		
-		itemIndex = 1
+		itemIndex = 0
 		for item in value
 			el = __$(@template).firstElementChild	# DOM function wraps with outer div
-			el.setAttribute('data-collection-item', itemIndex++)
+			el.setAttribute('data-collection-item', itemIndex + 1)
 			@root.appendChild(el)
 			view = new atlas.core.View(el)
 			bindingContext = 
 				model: item
 				presenter: context.presenter
-			# TODO - Hook events
+			itemAccessor = @resolveAccessor(context)
+			itemAccessor.itemIndex = itemIndex++
+			
+			context.presenter.bootstrapper.hookEvents(context.presenter, {view:view, itemAccessor:itemAccessor})
 			Binder.bind(b, bindingContext) for b in view.bindings
+			
 			@views.push view
 
 		if @usesExplicitTemplate and value.length > 0

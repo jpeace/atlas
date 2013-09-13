@@ -17,8 +17,6 @@ tests.dom.createEvent = (type) ->
     e.initEvent(type, true, true)
   return e
 
-
-
 tests.dom.simpleDocument =  """
                             <div data-presenter="One">
                             </div>
@@ -26,19 +24,29 @@ tests.dom.simpleDocument =  """
                             </div>
                             """
 
+tests.dom.documentWithControls =  """
+                                  <div data-presenter="Two">
+                                    <span data-bind="user.name">
+                                    <button data-name="change">Change!</button>
+                                  </div>
+                                  """
+
+tests.dom.namespacedDocument =  """
+                                <div data-presenter="One"></div>
+                                <div data-presenter="ns.Two"></div>
+                                """
+
 tests.dom.simpleView =  """
-                          <div data-bind="name" data-format="test.emphasize(!!!)"></div>
-                          <span id="age" data-bind="age;background-color:ageColor"></span>
+                        <div data-bind="name" data-format="test.emphasize(!!!)"></div>
+                        <span id="age" data-bind="age;background-color:ageColor"></span>
                         """
 
 tests.dom.nestedView =  """
-                          <div data-bind="user">
-                            <div data-bind="contact">
-                              <div data-bind="city"></div>
-                            </div>
+                        <div data-bind="user">
+                          <div data-bind="contact">
+                            <div data-bind="city"></div>
                           </div>
+                        </div>
                         """
-
-tests.dom.namespacedDocument = """<div data-presenter="One"></div><div data-presenter="ns.Two"></div>"""
 
 tests.dom.emptyElement = document.createElement('div')
