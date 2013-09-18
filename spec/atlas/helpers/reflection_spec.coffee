@@ -6,6 +6,8 @@ describe 'Reflection helpers', ->
     func1: ->
       prop3:
         func2: -> 'function'
+    funcWithArg: (big) ->
+      if big then 100 else 1
         
   describe 'properties', ->
     it 'can get simple properties', ->
@@ -16,6 +18,10 @@ describe 'Reflection helpers', ->
 
     it 'follows functions', ->
       expect(__.getProperty(getObject(), 'func1.prop3.func2')).toBe('function')
+
+    it 'supports arguments to functions', ->
+      expect(__.getProperty(getObject(), 'funcWithArg', {arg:false})).toBe(1)
+      expect(__.getProperty(getObject(), 'funcWithArg', {arg:true})).toBe(100)
 
     it 'can be configured to not follow functions', ->
       expect(__.getProperty(getObject(), 'func1.prop3', {followFunctions:false})).toBeNull()

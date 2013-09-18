@@ -12,6 +12,8 @@ bindingWithExplicitSourceProperty = ->
   getBinding('value(func)')
 bindingWithExplicitNegatedSourceProperty = ->
   getBinding('value(not func)')
+bindingWithExplicitSourcePropertyAndArgument = ->
+  getBinding('value(func(arg))')
 bindingWithExplicitValueAndSourceProperty = ->
   getBinding('on|off(func)')
 bindingWithMode = ->
@@ -56,6 +58,12 @@ describe 'Bindings', ->
       expect(binding.properties.length).toBe(1)
       expect(binding.properties[0]).toBe('func')
       expect(binding.possibleValues).toEqual({true:'', false:'value'})
+
+    it 'can have an explicit source property with an argument', ->
+      binding = bindingWithExplicitSourcePropertyAndArgument()
+      expect(binding.properties.length).toBe(1)
+      expect(binding.properties[0]).toBe('func')
+      expect(binding.propertyArg).toBe('arg')
 
     it 'can combine explicit values and source properties', ->
       binding = bindingWithExplicitValueAndSourceProperty()

@@ -31,7 +31,7 @@ class Collection extends atlas.binding.Base
 		@
 			
 	setValue: (value, context) ->
-		# OPTIMIZATION - Calculate deltas instead of rebuilding entire collection
+		# TODO - Calculate deltas instead of rebuilding entire collection
 		@views = []
 		@containerNode ?= @root
 		value ?= []

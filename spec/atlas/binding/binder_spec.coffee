@@ -40,6 +40,18 @@ describe 'Binder', ->
       assertBoundValue(tests.bindings.PossibleValuesBinding, atlas.presenters.One, 'locked')
       assertBoundValue(tests.bindings.PossibleValuesBinding, atlas.presenters.Two, 'editable') 
 
+    it 'works with property arguments', ->
+      assertBoundValue(tests.bindings.PropertyArgumentBinding, atlas.presenters.One, true)
+
+      b = new tests.bindings.PropertyArgumentBinding()
+      b.propertyArg = 'Howie Mandel'
+      p = new atlas.presenters.One()
+      
+      spyOn(b, 'setValue')
+      Binder.bind(b, p.bindingContext())
+
+      expect(b.setValue).toHaveBeenCalledWith(false, jasmine.any(Object))
+
     it 'binds null when no match is found', ->
       assertBoundValue(tests.bindings.NullBinding, atlas.presenters.One, null)
 

@@ -42,7 +42,7 @@ class Base
           else 
             propertyName
 
-        val = __.getProperty(sourceObj, propertyPath)
+        val = __.getProperty(sourceObj, propertyPath, {arg:@propertyArg})
         if val?
           return {
             source: sourceObj,
@@ -52,7 +52,7 @@ class Base
     throw new Error("Could not resolve accessor")
 
   parseSourceExpression: (sourceExpression) ->
-    matches = /^([\w\.]+)(\|(\w+))?(\((not )?(\w+)\))?( as (\w+))?$/.exec(sourceExpression)
+    matches = /^([\w\.]+)(\|(\w+))?(\((not )?(\w+)(\((\w+)\))?\))?( as (\w+))?$/.exec(sourceExpression)
     throw new Error("Could not parse source expression #{sourceExpression}") unless matches?
   
     # $1 - source property name/true value
@@ -61,15 +61,17 @@ class Base
     # $4 - has explicit source property?
     # $5 - explicit source negation
     # $6 - explicit source property name
-    # $7 - specifies mode?
-    # $8 - mode
+    # $7 - has property argument?
+    # $8 - property argument name
+    # $9 - specifies mode?
+    # $10 - mode
     
     trueValue = matches[1]
     falseValue = matches[3] ? ''
     @possibleValues = {true: trueValue, false: falseValue} if (matches[2]? || matches[4]?)
 
-    if matches[7]?
-      mode = matches[8]
+    if matches[9]?
+      mode = matches[10]
       throw new Error("Binding mode #{mode} not recognized") unless atlas.binding.modes[mode]?
       @mode = atlas.binding.modes[mode]
 
@@ -77,6 +79,8 @@ class Base
       @properties = [matches[6]]
       if matches[5]?
         @possibleValues = {true: falseValue, false: trueValue}
+      if matches[7]?
+        @propertyArg = matches[8]
     else
       @properties = [matches[1]]
 

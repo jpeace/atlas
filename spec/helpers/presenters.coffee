@@ -8,6 +8,9 @@ atlas.ensureNamespace('presenters').One =
 
     value: ->
       5
+
+    isFunny: (comedian) ->
+      if comedian is 'Richard Pryor' then true else false
       
 atlas.ensureNamespace('presenters').Two = 
   class PresenterTwo extends atlas.core.Presenter

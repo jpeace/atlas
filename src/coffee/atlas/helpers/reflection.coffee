@@ -7,7 +7,7 @@ atlas.addHelper 'getProperty', (obj, prop, options) ->
     return null unless current?
     current = 
       if _.isFunction(current[name]) and followFunctions
-        current[name]() 
+        current[name].call(current, options.arg) 
       else 
         current[name]
   return current ? null

@@ -53,3 +53,14 @@ tests.bindings.PossibleValuesBinding =
       @properties = ['isAdmin', 'admin']
       @possibleValues = {true: 'editable', false: 'locked'}
       @modelPath = ''
+
+tests.bindings.PropertyArgumentBinding =
+  class PropertyArgumentBinding extends BaseTestBinding
+    constructor: (@element) ->
+      @target = atlas.binding.null
+      @sources = [atlas.binding.sources.presenter, atlas.binding.sources.model]
+      @baseProperty = 'isFunny'
+      @properties = ['isFunny']
+      @propertyArg = 'Richard Pryor'
+      @possibleValues = null
+      @modelPath = ''
