@@ -2,14 +2,20 @@ require 'lib/underscore'
 
 class Atlas
   helpers: {}
+  behaviors: {}
   formatters: {}
   presenters: {}
+  settings: {}
   
   addHelper: (name, fn) ->
     @helpers[name] = fn if _.isFunction(fn)
 
-  addFormatter: (name, fn) ->
-    @formatters[name] = fn if _.isFunction(fn)
+  addBehavior: (namespace, name, ctor) ->
+    @behaviors[namespace] ?= {}
+    @behaviors[namespace][name] = ctor if _.isFunction(ctor)
+
+  addFormatter: (name, ctor) ->
+    @formatters[name] = ctor if _.isFunction(ctor)
     
   export: (namespace, object) ->
     ref = @ensureNamespace(namespace)

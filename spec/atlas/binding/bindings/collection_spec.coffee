@@ -48,6 +48,7 @@ createContext = ->
 	presenter: 
 		bootstrapper: 
 			hookEvents: ->
+			findBehaviors: ->
 		editClicked: =>
 
 convertDisplayBinding = (html) ->

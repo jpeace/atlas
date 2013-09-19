@@ -20,3 +20,5 @@ class Base
 			false
 		else
 			optionValue
+
+return Base

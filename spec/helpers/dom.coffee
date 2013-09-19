@@ -36,6 +36,12 @@ tests.dom.namespacedDocument =  """
                                 <div data-presenter="ns.Two"></div>
                                 """
 
+tests.dom.documentWithBehaviors =   """
+                                    <div data-presenter="Two">
+                                      <div data-behavior="tests.sample(argument)"></div>
+                                    </div>
+                                    """
+
 tests.dom.simpleView =  """
                         <div data-bind="name" data-format="test.emphasize(!!!)"></div>
                         <span id="age" data-bind="age;background-color:ageColor"></span>

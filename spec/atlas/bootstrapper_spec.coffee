@@ -5,6 +5,15 @@ createEvent = tests.dom.createEvent
 simpleDocument = tests.dom.simpleDocument
 namespacedDocument = tests.dom.namespacedDocument
 documentWithControls = tests.dom.documentWithControls
+documentWithBehaviors = tests.dom.documentWithBehaviors
+
+obj = 
+  ping: (arg) -> 
+      
+class SampleBehavior
+  configure: (element, arg) ->
+    obj.ping(arg)
+atlas.addBehavior('tests','sample',SampleBehavior)
 
 getBootstrapper = (html) ->
   b = new Bootstrapper(elementFromString(html))
@@ -16,20 +25,22 @@ describe 'Bootstrapper', ->
     it 'finds all presenters', ->
       b = getBootstrapper(simpleDocument)
       expect(b.presenters.length).toBe(2)
-      expect(b.presenters[0].name).toBe('One')
-      expect(b.presenters[1].name).toBe('Two')
-
+      
     it 'finds namespaced presenters', ->
       b = getBootstrapper(namespacedDocument)
       expect(b.presenters.length).toBe(2)
-      expect(b.presenters[0].name).toBe('One')
-      expect(b.presenters[1].name).toBe('ns.Two')
 
+    it 'configures behaviors', ->
+      spyOn(obj, 'ping')
+      b = getBootstrapper(documentWithBehaviors)
+
+      expect(obj.ping).toHaveBeenCalledWith('argument')
+      
   describe 'when hooking events', ->
     it 'sets up conventional hooks', ->
       bootstrapper = new Bootstrapper()
       view = new atlas.core.View(elementFromString(documentWithControls).childNodes[0])
-      presenter = new atlas.presenters.Two('PresenterTwo', view, bootstrapper)
+      presenter = new atlas.presenters.Two(view, bootstrapper)
       button = __$(view.root).elementsWithAttribute('data-name')[0]
 
       spyOn(presenter, 'changeClicked').andCallThrough()
@@ -57,7 +68,7 @@ describe 'Bootstrapper', ->
       subViewOne = new atlas.core.View(__$(masterView.root).elementsWithClass('subview-one')[0])
       subViewTwo = new atlas.core.View(__$(masterView.root).elementsWithClass('subview-two')[0])
       button = __$(masterView.root).elementsWithClass('change-two')[0]
-      presenter = new atlas.presenters.Two('PresenterTwo', masterView, bootstrapper)
+      presenter = new atlas.presenters.Two(masterView, bootstrapper)
 
       spyOn(presenter, 'changeClicked')
       bootstrapper.hookEvents(presenter, {view:subViewOne})
@@ -69,7 +80,7 @@ describe 'Bootstrapper', ->
     it 'passes the acted upon item when given', ->
       bootstrapper = new Bootstrapper()
       view = new atlas.core.View(elementFromString(documentWithControls).childNodes[0])
-      presenter = new atlas.presenters.Two('PresenterTwo', view, bootstrapper)
+      presenter = new atlas.presenters.Two(view, bootstrapper)
       button = __$(view.root).elementsWithAttribute('data-name')[0]
       itemAccessor = {
         source: presenter.model(),
@@ -91,7 +102,7 @@ describe 'Bootstrapper', ->
               """
       bootstrapper = new Bootstrapper()
       view = new atlas.core.View(elementFromString(html))
-      presenter = new atlas.presenters.Two('PresenterTwo', view, bootstrapper)
+      presenter = new atlas.presenters.Two(view, bootstrapper)
       changeButton = __$(view.root).elementsWithAttribute('data-name')[0]
       
       spyOn(presenter, 'changeClicked')

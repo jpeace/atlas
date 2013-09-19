@@ -1,4 +1,6 @@
-class NumberFormatter extends atlas.binding.formatters.Base
+Base = require 'atlas/binding/formatters/base'
+
+class NumberFormatter extends Base
 	canFormat: (value, args) ->
 		_.isNumber(value)
 
@@ -22,4 +24,4 @@ class NumberFormatter extends atlas.binding.formatters.Base
 		symbol = options.symbol ? '$'
 		parseFloat(string.replace(symbol,'','g').replace(/,/g,''))
 
-atlas.addFormatter 'number', NumberFormatter
+return NumberFormatter

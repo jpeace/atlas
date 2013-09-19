@@ -7,7 +7,7 @@ class Display extends atlas.binding.Base
   setValue: (value) ->
     if @format?
       value = @format.source[@format.method](value, @format.args) if @format.source.canFormat?(value)
-    @element[@displayProperty()] = value
+    @element[@displayProperty()] = value if value?
 
   getValue: ->
     value = @element[@displayProperty()]

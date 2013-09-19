@@ -65,7 +65,7 @@ tests.integration.getEnvironment = ->
   spans = (s for s in root.getElementsByTagName('span'))
 
   {
-    userDetailsPresenter: _.find(bootstrapper.presenters, (p) -> p.name is 'UserDetails'),
+    userDetailsPresenter: bootstrapper.presenters[0],
 
     nameInput: _.find(inputs, (i) -> i.id is 'name'),
     ageInput: _.find(inputs, (i) -> i.id is 'age'),

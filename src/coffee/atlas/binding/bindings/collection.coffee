@@ -56,6 +56,7 @@ class Collection extends atlas.binding.Base
 			itemAccessor.itemIndex = itemIndex++
 			
 			context.presenter.bootstrapper.hookEvents(context.presenter, {view:view, itemAccessor:itemAccessor})
+			context.presenter.bootstrapper.findBehaviors(context.presenter, {view:view})
 			Binder.bind(b, bindingContext) for b in view.bindings
 			
 			@views.push view

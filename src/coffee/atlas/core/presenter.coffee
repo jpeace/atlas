@@ -4,7 +4,7 @@ class Presenter
   init: ->
   model: -> {}
   
-  constructor: (@name, @view, @bootstrapper) ->
+  constructor: (@view, @bootstrapper) ->
   bindingContext: ->
     presenter: @
     model: @model()
